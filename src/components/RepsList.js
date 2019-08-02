@@ -11,16 +11,16 @@ export class DriverList extends Component {
     initColumns = () => {
         return [
             {
-                Header: 'Code',
-                accessor: 'code',
+                Header: 'Rep ID',
+                accessor: 'id',
             },
             {
-                Header: 'Name',
-                accessor: 'name',
+                Header: 'First Name',
+                accessor: 'firstName',
             },
             {
-                Header: 'Region',
-                accessor: 'region',
+                Header: 'Last Name',
+                accessor: 'lastName',
             }
         ];
     }
@@ -64,7 +64,7 @@ export class DriverList extends Component {
     render() {
         if (this.props.isLoading) return this.renderList([], `Loading list...`);
         if (this.props.isErrored) return this.renderList([], `Error occurred...`);
-        return this.renderList(this.props.list, `No any elements...`);
+        return this.renderList(this.props.list, `No any reps...`);
     }
 }
 

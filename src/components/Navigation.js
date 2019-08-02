@@ -45,13 +45,13 @@ export class Navigation extends Component {
             <div className="white-back">
                 <div className="main-nav">
                     <div className="main-categories">
-                        <p className="logo-text">Logistics</p>
+                        <p className="logo-text">Client Service</p>
                         <Link
                             id="option1"
                             onClick={this.handleClick}
                             innerRef={el => this.pending = el}
                             className="menu-active"
-                            to="/account/main">Drivers</Link>
+                            to="/account/main">Represents</Link>
                         <Link
                             id="option2"
                             onClick={this.handleClick}
