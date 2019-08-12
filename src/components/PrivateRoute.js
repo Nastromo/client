@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import LineSpinner from './LineSpinner';
 import Main from './Main';
+import Groups from './Groups';
 import Navigation from './Navigation';
 
 
@@ -19,6 +20,7 @@ export class PrivateRoute extends Component {
                 <Navigation />
                 <Switch>
                     <Route exact path="/account/main" component={Main} />
+                    <Route exact path="/account/groups" component={Groups} />
                     
                 </Switch>
             </div>
