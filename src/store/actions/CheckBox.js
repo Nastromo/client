@@ -24,6 +24,25 @@ export const check = (obj) => {
                 obj
             }
 
+        case `tnp`:
+            return {
+                type: 'CHECK_BOX_SET',
+                obj
+            }
+        case `supply`:
+            return {
+                type: 'CHECK_BOX_SET',
+                obj
+            }
+        case `igs`:
+            return {
+                type: 'CHECK_BOX_SET',
+                obj
+            }
+
+
+
+
         default: return ({
             type: 'CHECK_BOX',
             obj

@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import '../table.css';
+import { getReps, showRep, setMode } from '../store/actions/Reps';
+
 
 
 
 
 export class DriverList extends Component {
+    componentDidMount() {
+        this.props.getReps();
+    }
 
     initColumns = () => {
         return [
@@ -28,7 +33,7 @@ export class DriverList extends Component {
     handleRowClick = (state, rowInfo, column, instance) => {
         if (rowInfo) {
             return {
-                onClick: (e, handleOriginal) => this.props.showInstrum(Number(rowInfo.index)),
+                onClick: (e, handleOriginal) => this.props.showRep(Number(rowInfo.index)),
                 style: {
                     fontWeight: rowInfo.index === this.props.selected ? '700' : '600',
                     color: rowInfo.index === this.props.selected ? '#1ab394' : '#4e4e4e',
@@ -40,14 +45,10 @@ export class DriverList extends Component {
         }
     }
 
-    handleCreate = () => {
-        this.props.createMode(true);
-    }
-
     renderList = (list, text) => {
         return (
             <div className="content-table small-t basis50">
-                <div className="create-btn">Create</div>
+                <div className="create-btn" onClick={this.setCreateMode}>Create</div>
                 <ReactTable
                     data={list}
                     getTdProps={this.handleRowClick}
@@ -66,16 +67,21 @@ export class DriverList extends Component {
         if (this.props.isErrored) return this.renderList([], `Error occurred...`);
         return this.renderList(this.props.list, `No any reps...`);
     }
+
+    setCreateMode = () => {
+        this.props.setMode(true);
+    }
 }
 
 const mapStateToProps = (state) => ({
-    // list: state.tests,
-    list: [],
-    selected: state.activeTestRow,
+    list: state.reps,
+    selected: state.actRow.rep,
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    getReps: () => dispatch(getReps()),
+    showRep: (i) => dispatch(showRep(i)),
+    setMode: (bool) => dispatch(setMode(bool)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DriverList)
