@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let url = `http://192.168.20.211:8050`;
+let url = `http://192.168.20.216:8050`;
 if (window.location.href.includes(`localhost`)) {
     url = `http://localhost:9000`;
 }
