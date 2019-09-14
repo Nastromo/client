@@ -20,6 +20,13 @@ export class Navigation extends Component {
             case `/account/groups`:
                 this.setActive(this.processing);
                 break;
+            case `/account/clients`:
+                this.setActive(this.clients);
+                break;
+            case `/account/physitians`:
+                this.setActive(this.phy);
+                break;
+
             default: break;
         }
     }
@@ -31,6 +38,12 @@ export class Navigation extends Component {
                 break;
             case `option2`:
                 this.setActive(this.processing);
+                break;
+            case `option3`:
+                this.setActive(this.clients);
+                break;
+            case `option4`:
+                this.setActive(this.phy);
                 break;
             default: break;
         }
@@ -57,6 +70,16 @@ export class Navigation extends Component {
                             onClick={this.handleClick}
                             innerRef={el => this.processing = el}
                             to="/account/groups">Groups</Link>
+                        <Link
+                            id="option3"
+                            onClick={this.handleClick}
+                            innerRef={el => this.clients = el}
+                            to="/account/clients">Clients</Link>
+                        <Link
+                            id="option4"
+                            onClick={this.handleClick}
+                            innerRef={el => this.phy = el}
+                            to="/account/physitians">Physitians</Link>
                     </div>
 
                     <div className="work-info">
@@ -69,12 +92,12 @@ export class Navigation extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    
+
 
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navigation))

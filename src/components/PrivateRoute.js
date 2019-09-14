@@ -4,6 +4,8 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import LineSpinner from './LineSpinner';
 import Main from './Main';
 import Groups from './Groups';
+import Clients from './Clients';
+import Physitians from './Physitians';
 import Navigation from './Navigation';
 
 
@@ -21,6 +23,8 @@ export class PrivateRoute extends Component {
                 <Switch>
                     <Route exact path="/account/main" component={Main} />
                     <Route exact path="/account/groups" component={Groups} />
+                    <Route exact path="/account/clients" component={Clients} />
+                    <Route exact path="/account/physitians" component={Physitians} />
                     
                 </Switch>
             </div>
