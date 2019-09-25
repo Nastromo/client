@@ -16,6 +16,7 @@ export class NewDropDown extends Component {
 
     handleDropDown = (e) => {
         if (this.option.contains(e.target)) {
+            console.log(this.props.showDropDown)
             this.props.showDropDown({
                 id: this.props.id,
                 status: true

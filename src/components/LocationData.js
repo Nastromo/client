@@ -26,16 +26,7 @@ export class LocationData extends Component {
                             <p className="title-input-s">Street:</p>
                             <input type="text" className="simple-input-s" />
                         </div>
-                        <div className="wiffd">
-                            <p className="title-input-s">Unit type:</p>
-                            <NewDropDown
-                                id="time"
-                                actionType="SET_UNIT_OPTION"
-                                height="30px"
-                                status={this.props.isOpenTime}
-                                menu={this.types}
-                                option={this.props.type} />
-                        </div>
+
                     </div>
 
                     <div className="flex ju-btw">
@@ -80,6 +71,12 @@ export class LocationData extends Component {
                             <input type="text" className="simple-input-s" />
                         </div>
                     </div>
+                    <p className="title-input-s">Notes</p>
+                    <textarea
+                        className="gross-other-s"
+                        value={this.props.notes}
+                        onChange={this.props.changeNotes}
+                    ></textarea>
                 </div>
 
                 <div className="width100 marfge bas50">
