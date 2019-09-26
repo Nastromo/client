@@ -45,6 +45,9 @@ export class Navigation extends Component {
             case `option4`:
                 this.setActive(this.phy);
                 break;
+            case `option5`:
+                this.setActive(this.locs);
+                break;
             default: break;
         }
     }
@@ -80,6 +83,11 @@ export class Navigation extends Component {
                             onClick={this.handleClick}
                             innerRef={el => this.phy = el}
                             to="/account/physitians">Physitians</Link>
+                        <Link
+                            id="option5"
+                            onClick={this.handleClick}
+                            innerRef={el => this.locs = el}
+                            to="/account/locs">Clients Locations List</Link>
                     </div>
 
                     <div className="work-info">
