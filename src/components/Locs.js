@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import '../table.css';
-
+import { getLocs } from '../store/actions/GetLocs';
 
 
 
 export class Locs extends Component {
+    componentDidMount() {
+        this.props.getLocs();
+    }
 
     initColumns = () => {
         return [
@@ -84,13 +87,12 @@ export class Locs extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    // list: state.tests,
-    list: [],
+    list: state.locs,
     selected: state.activeTestRow,
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    getLocs: () => dispatch(getLocs())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Locs)
