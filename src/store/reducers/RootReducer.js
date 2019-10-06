@@ -9,11 +9,14 @@ import { reps, isCreate } from '../reducers/Reps';
 import { rep } from '../reducers/Rep';
 import { actRow } from '../reducers/ActiveRow';
 import { locs } from '../reducers/Locs';
+import { phys, phy } from '../reducers/Phys';
 
 
 
 
 const RootReducer = combineReducers({
+    phy,
+    phys,
     locs,
     isCreate,
     actRow,

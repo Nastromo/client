@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import '../table.css';
+import { getPhys, setPhy } from '../store/actions/Phys';
 
 
 
 
 export class GroupList extends Component {
+    componentDidMount() {
+        this.props.getPhys();
+    }
 
     initColumns = () => {
         return [
@@ -20,11 +24,11 @@ export class GroupList extends Component {
             },
             {
                 Header: 'First Name',
-                accessor: 'firstName',
+                accessor: 'name',
             },
             {
                 Header: 'Last Name',
-                accessor: 'lastName',
+                accessor: 'last',
             }
         ];
     }
@@ -32,7 +36,7 @@ export class GroupList extends Component {
     handleRowClick = (state, rowInfo, column, instance) => {
         if (rowInfo) {
             return {
-                onClick: (e, handleOriginal) => this.props.showInstrum(Number(rowInfo.index)),
+                onClick: (e, handleOriginal) => this.props.setPhy(Number(rowInfo.index)),
                 style: {
                     fontWeight: rowInfo.index === this.props.selected ? '700' : '600',
                     color: rowInfo.index === this.props.selected ? '#1ab394' : '#4e4e4e',
@@ -73,13 +77,13 @@ export class GroupList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    // list: state.tests,
-    list: [],
+    list: state.phys,
     selected: state.activeTestRow,
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    getPhys: () => dispatch(getPhys()),
+    setPhy: (i) => dispatch(setPhy(i))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)
