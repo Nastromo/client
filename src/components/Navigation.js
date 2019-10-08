@@ -82,7 +82,7 @@ export class Navigation extends Component {
                             id="option4"
                             onClick={this.handleClick}
                             innerRef={el => this.phy = el}
-                            to="/account/physitians">Physitians</Link>
+                            to="/account/physitians">Physicians</Link>
                         <Link
                             id="option5"
                             onClick={this.handleClick}

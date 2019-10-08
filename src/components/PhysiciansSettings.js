@@ -99,6 +99,7 @@ export class PhysiciansSettings extends Component {
                 <div className="flex ju-btw">
                     <div className="bas39">
                         <div className="margju">
+                            <div className="green-btn">Update</div>
                             <p className="title-input-s">Physician Id:</p>
                             <input type="text" className="simple-input-s ma-rg" value={this.props.phy.id ? this.props.phy.id : ""} />
                         </div>

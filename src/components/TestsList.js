@@ -1,80 +1,129 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactTable from "react-table";
-import '../table.css';
-
+import SearchInput from './SearchInput';
+import { isActive } from '../store/actions/Tabs';
 
 
 
 export class GroupList extends Component {
 
-    initColumns = () => {
-        return [
-            {
-                Header: 'Code',
-                accessor: 'code',
-            },
-            {
-                Header: 'Description',
-                accessor: 'desc',
-            },
-            {
-                Header: 'Action',
-                accessor: 'action',
-            }
-        ];
-    }
 
-    handleRowClick = (state, rowInfo, column, instance) => {
-        if (rowInfo) {
-            return {
-                onClick: (e, handleOriginal) => this.props.showInstrum(Number(rowInfo.index)),
-                style: {
-                    fontWeight: rowInfo.index === this.props.selected ? '700' : '600',
-                    color: rowInfo.index === this.props.selected ? '#1ab394' : '#4e4e4e',
-                    background: rowInfo.index === this.props.selected ? '#e2fff9' : '',
-                }
-            }
+    returnSearch = () => {
+        if (this.props.isAct) {
+            return (
+                <SearchInput
+                    id="order"
+                    type="text"
+                    view="search-input"
+                    url="order"
+                    onItemClick={this.props.addOrder}
+                    isLoading={this.props.isLoadOrder}
+                    searchQuery={this.props.searchOrder}
+                    searchResults={this.props.order} />
+            )
         } else {
-            return {}
+            return (
+                <SearchInput
+                    id="diags"
+                    type="text"
+                    view="search-input"
+                    url="diags"
+                    onItemClick={this.props.addDiag}
+                    isLoading={this.props.isLoadDiags}
+                    searchQuery={this.props.searchDiags}
+                    searchResults={this.props.diags} />
+            )
         }
     }
 
-    handleCreate = () => {
-        this.props.createMode(true);
+    handleClick = (e) => {
+        if (e.target.id === `order`) {
+            this.props.isActive(true);
+        } else {
+            this.props.isActive(false);
+        }
     }
 
-    renderList = (list, text) => {
-        return (
-            <div className="content-table small-t basis50 marg-ty">
-                <ReactTable
-                    data={list}
-                    getTdProps={this.handleRowClick}
-                    columns={this.initColumns()}
-                    resizable={false}
-                    filterable={true}
-                    defaultPageSize={15}
-                    noDataText={text}
-                />
-            </div>
-        )
+    returnOrders = () => {
+        if (this.props.ordersList) {
+            return (
+                <div>
+                    {this.props.ordersList.map((item, i) => {
+                        return (
+                            <div key={i} className="flex">
+                                <div className="line">
+                                    <p className="bas30">{item.code}</p>
+                                    <p>{item.description}</p>
+                                </div>
+                                <div className="delete-sml"></div>
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        } else {
+            return null;
+        }
+    }
+
+    returnDiags = () => {
+        if (this.props.ordersList) {
+            return (
+                <div>
+                    {this.props.diagList.map((item, i) => {
+                        return (
+                            <div key={i} className="flex">
+                                <div className="line">
+                                    <p className="bas30">{item.code}</p>
+                                    <p>{item.description}</p>
+                                </div>
+                                <div className="delete-sml"></div>
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        } else {
+            return null;
+        }
     }
 
     render() {
-        if (this.props.isLoading) return this.renderList([], `Loading list...`);
-        if (this.props.isErrored) return this.renderList([], `Error occurred...`);
-        return this.renderList(this.props.list, `No any tests...`);
+        return (
+            <div>
+                <div className="flex">
+                    <div onClick={this.handleClick} id="order" className={this.props.isAct ? "tagder actiee" : "tagder"}>Order Sets</div>
+                    <div onClick={this.handleClick} id="diags" className={this.props.isAct ? "tagder" : "tagder actiee"}>Diagnosis</div>
+                </div>
+                {this.returnSearch()}
+
+                {this.props.isAct ? <p className="subtitdd">Order Sets</p> : <p className="subtitdd">Diagnosis</p>}
+
+                {
+                    this.props.isAct ? this.returnOrders() : this.returnDiags()
+                }
+
+            </div>
+        )
     }
 }
 
 const mapStateToProps = (state) => ({
-    // list: state.tests,
-    list: [],
-    selected: state.activeTestRow,
+    isLoadDiags: state.searchLoading.diags,
+    searchDiags: state.searchQuery.diags,
+    diags: state.searchResults.diags,
+
+    isLoadOrder: state.searchLoading.order,
+    searchOrder: state.searchQuery.order,
+    order: state.searchResults.order,
+
+    isAct: state.tabact,
+    ordersList: state.phy.ordersList,
+    diagList: state.phy.diagList,
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    isActive: (bool) => dispatch(isActive(bool))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

@@ -10,11 +10,13 @@ import { rep } from '../reducers/Rep';
 import { actRow } from '../reducers/ActiveRow';
 import { locs } from '../reducers/Locs';
 import { phys, phy } from '../reducers/Phys';
+import { tabact } from '../reducers/Tabs';
 
 
 
 
 const RootReducer = combineReducers({
+    tabact,
     phy,
     phys,
     locs,
