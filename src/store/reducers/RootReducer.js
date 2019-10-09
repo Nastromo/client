@@ -7,15 +7,17 @@ import { searchQuery, searchLoading, searchResults, activeRow } from '../reducer
 import { newDDStatus, newDDOption } from '../reducers/NewDropDown';
 import { reps, isCreate } from '../reducers/Reps';
 import { rep } from '../reducers/Rep';
-import { actRow } from '../reducers/ActiveRow';
+import { actRow, activePhyRaw } from '../reducers/ActiveRow';
 import { locs } from '../reducers/Locs';
-import { phys, phy } from '../reducers/Phys';
+import { phys, phy, isCreateModePhy } from '../reducers/Phys';
 import { tabact } from '../reducers/Tabs';
 
 
 
 
 const RootReducer = combineReducers({
+    activePhyRaw,
+    isCreateModePhy,
     tabact,
     phy,
     phys,

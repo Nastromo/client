@@ -2078,6 +2078,28 @@ p.logo-text:hover {
     cursor: pointer;
 }
 
+.notification-blue {
+    top: 0;
+    background: #ade8f7;
+    color: #2b609c;
+}
+
+.create {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+    height: 30px;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    background: #eece66;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    color: #a38319;
+    box-sizing: border-box; 
+}
+
 .marfghjj {
     margin: 10px 0;
 }

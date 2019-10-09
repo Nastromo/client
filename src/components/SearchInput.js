@@ -58,7 +58,7 @@ export class SearchInput extends Component {
     itemClick = (e) => {
         this.props.itemClick({
             id: this.props.id,
-            text: this.props.searchResults[this.props.activeRow],
+            text: "",
         });
         if (typeof this.props.onItemClick === "function") this.props.onItemClick(this.props.searchResults[this.props.activeRow]);
     }

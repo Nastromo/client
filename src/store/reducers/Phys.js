@@ -60,6 +60,35 @@ export const phy = (state = {}, action) => {
             newState.diagList = JSON.stringify(list);
             return newState;
 
+        case `SET_NPI`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.npi = action.text;
+            return newState;
+
+        case `SET_NAME`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.name = action.text;
+            return newState;
+
+        case `SET_LAST`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.last = action.text;
+            return newState;
+
+        case `SET_MID`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.midName = action.text;
+            return newState;
+
+
+        default: return state;
+    }
+}
+
+export const isCreateModePhy = (state = false, action) => {
+    switch (action.type) {
+        case `SET_CREATE_MODE_PHY`:
+            return action.bool;
 
         default: return state;
     }

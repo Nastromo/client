@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import TestsList from './TestsList';
 import NewDropDown from './NewDropDown';
-import { delCred } from '../store/actions/Phys';
+import { delCred, changeNpi, changeName, changeLast, changeMid, changeId, handleCreate, handleUpdate } from '../store/actions/Phys';
 
 
 
@@ -100,29 +100,33 @@ export class PhysiciansSettings extends Component {
                 <div className="flex ju-btw">
                     <div className="bas39">
                         <div className="margju">
-                            <div className="green-btn">Update</div>
+                            
+                            {this.props.isCreateMode ? 
+                            <div onClick={this.props.handleCreate} className="create">Create</div> :
+                            <div onClick={this.props.handleUpdate} className="green-btn wi130g">Update</div>}
+
                             <p className="title-input-s">Physician Id:</p>
-                            <input type="text" className="simple-input-s ma-rg" value={this.props.phy.id ? this.props.phy.id : ""} />
+                            <input type="text" className="simple-input-s ma-rg" value={this.props.phy.id ? this.props.phy.id : ""} onChange={this.props.changeId} />
                         </div>
 
                         <div className="margju">
                             <p className="title-input-s">NPI:</p>
-                            <input type="text" className="simple-input-s ma-rg" value={this.props.phy.npi ? this.props.phy.npi : ""} />
+                            <input type="text" className="simple-input-s ma-rg" value={this.props.phy.npi ? this.props.phy.npi : ""} onChange={this.props.changeNpi} />
                         </div>
 
                         <div className="margju">
                             <p className="title-input-s">First Name:</p>
-                            <input type="text" className="simple-input-s ma-rg" value={this.props.phy.name ? this.props.phy.name : ""} />
+                            <input type="text" className="simple-input-s ma-rg" value={this.props.phy.name ? this.props.phy.name : ""} onChange={this.props.changeName} />
                         </div>
 
                         <div className="margju">
                             <p className="title-input-s">Last Name:</p>
-                            <input type="text" className="simple-input-s ma-rg" value={this.props.phy.last ? this.props.phy.last : ""} />
+                            <input type="text" className="simple-input-s ma-rg" value={this.props.phy.last ? this.props.phy.last : ""} onChange={this.props.changeLast} />
                         </div>
 
                         <div className="margju">
-                            <p className="title-input-s">Middle Name:</p>
-                            <input type="text" className="simple-input-s ma-rg" value={this.props.phy.midName ? this.props.phy.midName : ""} />
+                            <p className="title-input-s">Middle Name (optinal):</p>
+                            <input type="text" className="simple-input-s ma-rg" value={this.props.phy.midName ? this.props.phy.midName : ""} onChange={this.props.changeMid} />
                         </div>
 
                         <div className="margju">
@@ -191,10 +195,18 @@ const mapStateToProps = (state) => ({
     isOpenCreds: state.newDDStatus.creds,
     isOpenPecos: state.newDDStatus.pecos,
     creds: state.phy.creds,
+    isCreateMode: state.isCreateModePhy
 })
 
 const mapDispatchToProps = dispatch => ({
     delCred: (e) => dispatch(delCred(e)),
+    changeNpi: (e) => dispatch(changeNpi(e)),
+    changeName: (e) => dispatch(changeName(e)),
+    changeLast: (e) => dispatch(changeLast(e)),
+    changeMid: (e) => dispatch(changeMid(e)),
+    changeId: (e) => dispatch(changeId(e)),
+    handleCreate: (e) => dispatch(handleCreate(e)),
+    handleUpdate: (e) => dispatch(handleUpdate(e)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhysiciansSettings)

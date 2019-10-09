@@ -12,14 +12,15 @@ export class Physitians extends Component {
         return (
             <div className="flex main-d">
                 <PhysiciansList />
-                <PhysiciansSettings />
+                { this.props.activePhyRaw || this.props.activePhyRaw === 0  ? <PhysiciansSettings /> : null}
+                
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-
+    activePhyRaw: state.activePhyRaw
 })
 
 const mapDispatchToProps = {

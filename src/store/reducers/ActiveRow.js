@@ -9,3 +9,14 @@ export const actRow = (state = {}, action) => {
         default: return state;
     }
 }
+
+
+export const activePhyRaw = (state = null, action) => {
+    switch (action.type) {
+        case `SET_PHY_ROW`:
+            return action.index;
+
+        default: return state;
+    }
+}
+

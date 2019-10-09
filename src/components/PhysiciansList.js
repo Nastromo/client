@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import '../table.css';
-import { getPhys, setPhy } from '../store/actions/Phys';
+import { getPhys, setPhy, setCreateMode } from '../store/actions/Phys';
 
 
 
@@ -49,13 +49,13 @@ export class GroupList extends Component {
     }
 
     handleCreate = () => {
-        this.props.createMode(true);
+        this.props.setCreateMode(true);
     }
 
     renderList = (list, text) => {
         return (
             <div className="content-table small-t basis50 marg-ty">
-                <div className="create-btn">Create</div>
+                <div onClick={this.handleCreate} className="create-btn">Create</div>
                 <ReactTable
                     data={list}
                     getTdProps={this.handleRowClick}
@@ -78,12 +78,13 @@ export class GroupList extends Component {
 
 const mapStateToProps = (state) => ({
     list: state.phys,
-    selected: state.activeTestRow,
+    selected: state.activePhyRaw,
 })
 
 const mapDispatchToProps = dispatch => ({
     getPhys: () => dispatch(getPhys()),
-    setPhy: (i) => dispatch(setPhy(i))
+    setPhy: (i) => dispatch(setPhy(i)),
+    setCreateMode: (bool) => dispatch(setCreateMode(bool)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

@@ -47,6 +47,7 @@ export class GroupList extends Component {
     renderList = (list, text) => {
         return (
             <div className="content-table small-t basis50 marg-ty minus-mar">
+            
                 <ReactTable
                     data={list}
                     getTdProps={this.handleRowClick}
