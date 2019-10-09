@@ -10,6 +10,14 @@ export const showPhy = (obj) => ({
     obj
 });
 
+
+export const delCred = (e) => ({
+    type: 'DEL_CRED',
+    index: e.target.id
+});
+
+
+
 export const getPhys = () => {
     return async (dispatch, getState) => {
         try {

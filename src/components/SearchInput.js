@@ -33,12 +33,12 @@ export class SearchInput extends Component {
                 this.props.onItemClick(this.props.searchResults[this.props.activeRow]);
                 this.props.itemClick({
                     id: this.props.id,
-                    text: this.props.searchResults[this.props.activeRow],
+                    text: "",
                 });
             } else {
                 this.props.itemClick({
                     id: this.props.id,
-                    text: this.props.searchResults[this.props.activeRow],
+                    text: "",
                 });
             }
         }

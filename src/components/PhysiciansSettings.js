@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import TestsList from './TestsList';
 import NewDropDown from './NewDropDown';
+import { delCred } from '../store/actions/Phys';
 
 
 
@@ -11,18 +12,18 @@ export class PhysiciansSettings extends Component {
         super(props);
         this.pecos = [`YES`, `NO`];
         this.creds = [
-            `AAP`, 
-            `ABAI`, 
-            `ABFP`, 
-            `ABO`, 
-            `ABPN`, 
-            `AK`, 
-            `AOBFP`, 
+            `AAP`,
+            `ABAI`,
+            `ABFP`,
+            `ABO`,
+            `ABPN`,
+            `AK`,
+            `AOBFP`,
             `AOBSPOMM`,
-            `AP`, 
-            `ASG`, 
-            `BHMS`, 
-            `BSN`, 
+            `AP`,
+            `ASG`,
+            `BHMS`,
+            `BSN`,
             `CA`,
             `CAAPM`,
             `CAC`,
@@ -90,7 +91,7 @@ export class PhysiciansSettings extends Component {
             `RPh`,
             `RS`,
             `SG`,
-            `VMD` ]
+            `VMD`]
     }
 
     render() {
@@ -144,8 +145,12 @@ export class PhysiciansSettings extends Component {
                                 height="30px"
                                 status={this.props.isOpenCreds}
                                 menu={this.creds}
-                                option={this.props.creds} />
+                                option="" />
                         </div>
+
+                        {
+                            this.returnCreds()
+                        }
 
                         <p className="title-input-s">CLIENT LOCATIONS:</p>
                         <div className="flex gress">
@@ -160,17 +165,36 @@ export class PhysiciansSettings extends Component {
             </div>
         )
     }
+
+    returnCreds = () => {
+        if (this.props.creds) {
+            const list = JSON.parse(this.props.creds);
+            return (
+                <div className="flex marfghjj">
+                    {
+                        list.map((item, i) => {
+                            return (
+                                <div key={i} id={i} onClick={this.props.delCred} className="cred">
+                                    {item}
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            )
+        }
+    }
 }
 
 const mapStateToProps = (state) => ({
     phy: state.phy,
     isOpenCreds: state.newDDStatus.creds,
     isOpenPecos: state.newDDStatus.pecos,
-    creds: state.phy.creds
+    creds: state.phy.creds,
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+    delCred: (e) => dispatch(delCred(e)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhysiciansSettings)

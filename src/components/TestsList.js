@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SearchInput from './SearchInput';
-import { isActive } from '../store/actions/Tabs';
+import { isActive, addOrder, delOrder, addDiag, delDiag } from '../store/actions/Tabs';
+
 
 
 
@@ -46,16 +47,16 @@ export class GroupList extends Component {
 
     returnOrders = () => {
         if (this.props.ordersList) {
+            const list = JSON.parse(this.props.ordersList);
             return (
                 <div>
-                    {this.props.ordersList.map((item, i) => {
+                    {list.map((item, i) => {
                         return (
-                            <div key={i} className="flex">
+                            <div key={i} className="flex marfgjj">
                                 <div className="line">
-                                    <p className="bas30">{item.code}</p>
-                                    <p>{item.description}</p>
+                                    <p className="bas30">{item}</p>
                                 </div>
-                                <div className="delete-sml"></div>
+                                <div onClick={this.props.delOrder} id={i} className="delete-sml"></div>
                             </div>
                         )
                     })}
@@ -67,17 +68,17 @@ export class GroupList extends Component {
     }
 
     returnDiags = () => {
-        if (this.props.ordersList) {
+        if (this.props.diagList) {
+            const list = JSON.parse(this.props.diagList);
             return (
                 <div>
-                    {this.props.diagList.map((item, i) => {
+                    {list.map((item, i) => {
                         return (
-                            <div key={i} className="flex">
+                            <div key={i} className="flex marfgjj">
                                 <div className="line">
-                                    <p className="bas30">{item.code}</p>
-                                    <p>{item.description}</p>
+                                    <p className="bas95">{item}</p>
                                 </div>
-                                <div className="delete-sml"></div>
+                                <div onClick={this.props.delDiag} id={i} className="delete-sml"></div>
                             </div>
                         )
                     })}
@@ -120,10 +121,15 @@ const mapStateToProps = (state) => ({
     isAct: state.tabact,
     ordersList: state.phy.ordersList,
     diagList: state.phy.diagList,
+    
 })
 
 const mapDispatchToProps = dispatch => ({
-    isActive: (bool) => dispatch(isActive(bool))
+    isActive: (bool) => dispatch(isActive(bool)),
+    addOrder: (text) => dispatch(addOrder(text)),
+    addDiag: (text) => dispatch(addDiag(text)),
+    delOrder: (event) => dispatch(delOrder(event)),
+    delDiag: (event) => dispatch(delDiag(event)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

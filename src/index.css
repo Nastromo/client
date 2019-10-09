@@ -2042,6 +2042,10 @@ p.logo-text:hover {
     margin: 5px 0;
 }
 
+.bas95 {
+    flex-basis: 95%;
+}
+
 .line {
     height: 27px;
     display: flex;
@@ -2055,6 +2059,25 @@ p.logo-text:hover {
     margin-right: 10px;
 }
 
+.marfgjj {
+    margin: 5px 0;
+}
+
 .bas30 {
     flex-basis: 30%;
+}
+
+.cred {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border: 2px solid #a6ecde;
+    color: #12a588;
+    border-radius: 4px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+
+.marfghjj {
+    margin: 10px 0;
 }
