@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import '../table.css';
-import { getLocs } from '../store/actions/GetLocs';
+import { getLocs, goToClients } from '../store/actions/GetLocs';
 
 
 
@@ -47,7 +47,7 @@ export class Locs extends Component {
     handleRowClick = (state, rowInfo, column, instance) => {
         if (rowInfo) {
             return {
-                onClick: (e, handleOriginal) => this.props.showInstrum(Number(rowInfo.index)),
+                onClick: (e, handleOriginal) => this.props.goToClients(Number(rowInfo.index)),
                 style: {
                     fontWeight: rowInfo.index === this.props.selected ? '700' : '600',
                     color: rowInfo.index === this.props.selected ? '#1ab394' : '#4e4e4e',
@@ -92,7 +92,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getLocs: () => dispatch(getLocs())
+    getLocs: () => dispatch(getLocs()),
+    goToClients: (i) => dispatch(goToClients(i))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Locs)

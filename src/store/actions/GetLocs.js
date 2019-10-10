@@ -15,3 +15,14 @@ export const getLocs = () => {
         }
     }
 }
+
+export const goToClients = (i) => {
+    return async (dispatch, getState) => {
+        try {
+            const clientId = getState().locs[i].clientId;
+            window.location.href = `/account/clients?clientId=${clientId}`;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
