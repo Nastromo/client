@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import '../table.css';
-
+import { getClients, showClient } from '../store/actions/Clients';
 
 
 
 export class GroupList extends Component {
+    componentDidMount() {
+        this.props.getClients();
+    }
 
     initColumns = () => {
         return [
@@ -16,7 +19,7 @@ export class GroupList extends Component {
             },
             {
                 Header: 'Client Name',
-                accessor: 'clientName',
+                accessor: 'title',
             }
         ];
     }
@@ -24,7 +27,7 @@ export class GroupList extends Component {
     handleRowClick = (state, rowInfo, column, instance) => {
         if (rowInfo) {
             return {
-                onClick: (e, handleOriginal) => this.props.showInstrum(Number(rowInfo.index)),
+                onClick: (e, handleOriginal) => this.props.showClient(Number(rowInfo.index)),
                 style: {
                     fontWeight: rowInfo.index === this.props.selected ? '700' : '600',
                     color: rowInfo.index === this.props.selected ? '#1ab394' : '#4e4e4e',
@@ -50,7 +53,7 @@ export class GroupList extends Component {
                     columns={this.initColumns()}
                     resizable={false}
                     filterable={true}
-                    defaultPageSize={27}
+                    defaultPageSize={15}
                     noDataText={text}
                 />
             </div>
@@ -60,18 +63,18 @@ export class GroupList extends Component {
     render() {
         if (this.props.isLoading) return this.renderList([], `Loading list...`);
         if (this.props.isErrored) return this.renderList([], `Error occurred...`);
-        return this.renderList(this.props.list, `No any groups...`);
+        return this.renderList(this.props.list, `No any clients...`);
     }
 }
 
 const mapStateToProps = (state) => ({
-    // list: state.tests,
-    list: [],
+    list: state.clients,
     selected: state.activeTestRow,
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    getClients: () => dispatch(getClients()),
+    showClient: (i) => dispatch(showClient(i)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

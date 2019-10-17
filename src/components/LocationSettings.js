@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import LocationsList from './LocationsList';
 import LocationData from './LocationData';
 import CheckBox from './Checkbox';
 import NewDropDown from './NewDropDown';
+import { changeLogin, changePass, handleLogUpdate } from '../store/actions/Clients';
+
 
 
 
@@ -24,18 +26,27 @@ export class LocationSettings extends Component {
         }
     }
 
+    returnLogins = () => {
+        if (this.props.logins) {
+            return this.props.logins.map((item, i) => {
+                return (
+                    <div key={i} className="flex margoi">
+                        <input id={i} type="text" className="simple-input-s ma-rg" value={item.login} onChange={this.props.changeLogin} />
+                        <input id={i} type="text" className="simple-input-s ma-rg" value={item.pass} onChange={this.props.changePass} />
+                        <div id={i} onClick={this.props.handleLogUpdate} className="green-btn">Update</div>
+                    </div>
+                )
+            });
+        }
+    }
+
     render() {
         if (this.props.client) {
             return (
                 <div>
                     <p className="title-input-s">Existing logins:</p>
                     <div className="heiht130">
-                        <div className="flex margoi">
-                            <input type="text" className="simple-input-s ma-rg" placeholder="login" />
-                            <input type="text" className="simple-input-s ma-rg" placeholder="password" />
-                            <div className="green-btn">Update</div>
-                        </div>
-
+                        {this.returnLogins()}
                     </div>
 
 
@@ -89,6 +100,10 @@ export class LocationSettings extends Component {
                         <p className="title-img">Upload PDF</p>
                         <input type="file" onChange={this.handleUpload} multiple />
                     </div>
+
+                    <div className="flex mafdd ju-end">
+                        <div className="green-btn">Update</div>
+                    </div>
                 </div>
             )
         } else {
@@ -98,12 +113,14 @@ export class LocationSettings extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    logins: state.client.logins,
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+    changeLogin: (e) => dispatch(changeLogin(e)),
+    changePass: (e) => dispatch(changePass(e)),
+    handleLogUpdate: (e) => dispatch(handleLogUpdate(e)),
+})
 
 
 

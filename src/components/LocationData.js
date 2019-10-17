@@ -132,6 +132,9 @@ export class LocationData extends Component {
                         value={this.props.notes}
                         onChange={this.props.changeNotes}
                     ></textarea>
+                    <div className="flex mafdd ju-end">
+                        <div className="green-btn">Update</div>
+                    </div>
                 </div>
 
                 <div className="width100 marfge bas50">
