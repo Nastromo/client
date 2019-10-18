@@ -35,6 +35,28 @@ export const showClient = (i) => {
     }
 }
 
+export const handleUpdate = (i) => {
+    return async (dispatch, getState) => {
+        try {
+            
+            const fd = new FormData();
+            const files = getState().files;
+
+            for (let j = 0; j < files.length; j++) {
+                fd.append(`pdf`, files[j]);
+            }
+            
+            const clients = await API.post(`/v1/pdf`, fd, {
+                'Content-Type': `multipart/form-data`
+            });
+            
+            dispatch(setClients(clients.data));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
 export const getClients = () => {
     return async (dispatch, getState) => {
         try {
@@ -95,7 +117,132 @@ export const showLoc = (i) => {
     }
 }
 
+
+
+export const addPhy = (text) => {
+    return async (dispatch, getState) => {
+        try {
+            const arr = text.split(` | `);
+            const locId = getState().loc.id;
+            const phys = await API.post(`/v1/physicians`, { phyId: arr[0], locId });
+            dispatch(setPhys(phys.data));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+export const delPhy = (e) => {
+    return async (dispatch, getState) => {
+        try {
+            const phyId = e.target.id;
+            const locId = getState().loc.id;
+            const phys = await API.post(`/v1/physicians/del`, { phyId, locId });
+            dispatch(setPhys(phys.data));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+
 export const setLoc = (obj) => ({
     type: 'SET_LOC',
     obj
 });
+
+export const changeName = (e) => ({
+    type: 'SET_NAME',
+    text: e.target.value
+});
+
+export const changeStreet = (e) => ({
+    type: 'SET_STREET',
+    text: e.target.value
+});
+
+export const changeCity = (e) => ({
+    type: 'SET_CITY',
+    text: e.target.value
+});
+
+export const changeZip = (e) => ({
+    type: 'SET_ZIP',
+    text: e.target.value
+});
+
+export const changePhone = (e) => ({
+    type: 'SET_PHONE',
+    text: e.target.value
+});
+
+export const changePhoneExt = (e) => ({
+    type: 'SET_EXT',
+    text: e.target.value
+});
+
+export const changeEmail = (e) => ({
+    type: 'SET_EMAIL',
+    text: e.target.value
+});
+
+export const changeStreetB = (e) => ({
+    type: 'SET_STREETB',
+    text: e.target.value
+});
+
+export const changeCityB = (e) => ({
+    type: 'SET_CITYB',
+    text: e.target.value
+});
+
+export const changeZipB = (e) => ({
+    type: 'SET_ZIPB',
+    text: e.target.value
+});
+
+export const changePhoneB = (e) => ({
+    type: 'SET_PHONEB',
+    text: e.target.value
+});
+
+export const changePhoneExtB = (e) => ({
+    type: 'SET_EXTB',
+    text: e.target.value
+});
+
+export const changeFaxB = (e) => ({
+    type: 'SET_FAXB',
+    text: e.target.value
+});
+
+export const changeEmailB = (e) => ({
+    type: 'SET_EMAILB',
+    text: e.target.value
+});
+
+export const changeNotes = (e) => ({
+    type: 'SET_NOTEB',
+    text: e.target.value
+});
+
+export const changeFax = (e) => ({
+    type: 'SET_FAX',
+    text: e.target.value
+});
+
+export const showPdfPreview = (files) => ({
+    type: 'SET_PDF',
+    files
+});
+
+export const bindPdf = (files) => ({
+    type: 'SET_REAL_PDF',
+    files
+});
+
+export const setPdf = (files) => ({
+    type: 'SET_EDITED_PDF',
+    files
+});
+

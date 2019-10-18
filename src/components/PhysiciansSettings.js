@@ -172,7 +172,7 @@ export class PhysiciansSettings extends Component {
 
     returnCreds = () => {
         if (this.props.creds) {
-            const list = JSON.parse(this.props.creds);
+            const list = JSON.parse(this.props.creds ? this.props.creds : "[]");
             return (
                 <div className="flex marfghjj">
                     {

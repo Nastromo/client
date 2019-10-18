@@ -1818,10 +1818,6 @@ p.logo-text:hover {
     justify-content: space-between;
 }
 
-.al-cntr {
-    align-items: center;
-}
-
 .basis50 {
     flex-basis: 50%;
 }
@@ -2131,4 +2127,40 @@ p.logo-text:hover {
 
 .ghty {
     margin: 0 0 5px 0;
+}
+
+.tituj {
+    margin: 10px 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    background: #e6e6e6;
+}
+
+.marguio {
+    margin: 3px 0;
+}
+
+.al-cntr {
+    align-items: center;
+}
+
+.al-cntd {
+    align-items: center;
+}
+
+.dargh {
+    margin: 3px 0;
+}
+
+.dfert {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #000;
+    padding: 4px 6px;
+    background: beige;
+    border-radius: 3px;
+    outline: none;
+    margin: 3px 5px 3px 0;
+    text-decoration: none;
 }

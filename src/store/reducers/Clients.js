@@ -7,6 +7,15 @@ export const clients = (state = [], action) => {
     }
 }
 
+export const files = (state = ``, action) => {
+    switch (action.type) {
+        case `SET_REAL_PDF`:
+            return action.files;
+
+        default: return state;
+    }
+}
+
 export const client = (state = {}, action) => {
     let newState;
     switch (action.type) {
@@ -16,6 +25,15 @@ export const client = (state = {}, action) => {
         case `SET_STAT_OPTION`:
             newState = JSON.parse(JSON.stringify(state));
             newState.repOpt = action.obj.option;
+            return newState;
+
+        case `SET_PDF`:
+            newState = JSON.parse(JSON.stringify(state));
+            const pdfs = JSON.parse(newState.pdf ? newState.pdf : "[]");
+            for (let i = 0; i < action.files.length; i++) {
+                pdfs.push(action.files[i]);
+            }
+            newState.pdf = JSON.stringify(pdfs);
             return newState;
 
         case `CHECK_BOX_SET`:
@@ -36,9 +54,6 @@ export const client = (state = {}, action) => {
                     newState = JSON.parse(JSON.stringify(state));
                     newState.emr = action.obj.status;
                     return newState;
-
-
-
                 case `his`:
                     newState = JSON.parse(JSON.stringify(state));
                     newState.histology = action.obj.status;
@@ -92,9 +107,92 @@ export const activeClientRow = (state = null, action) => {
 }
 
 export const loc = (state = {}, action) => {
+    let newState;
     switch (action.type) {
         case `SET_LOC`:
             return action.obj;
+
+        case `SET_NAME`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.name = action.text;
+            return newState;
+
+        case `SET_STREET`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.street = action.text;
+            return newState;
+
+        case `SET_CITY`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.city = action.text;
+            return newState;
+
+        case `SET_ZIP`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.zip = action.text;
+            return newState;
+
+        case `SET_PHONE`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.phone = action.text;
+            return newState;
+
+        case `SET_EXT`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.phoneExt = action.text;
+            return newState;
+
+        case `SET_EMAIL`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.email = action.text;
+            return newState;
+
+        case `SET_STREETB`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.streetB = action.text;
+            return newState;
+
+        case `SET_CITYB`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.cityB = action.text;
+            return newState;
+
+        case `SET_ZIPB`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.zipB = action.text;
+            return newState;
+
+        case `SET_PHONEB`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.phoneB = action.text;
+            return newState;
+
+        case `SET_EXTB`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.phoneExtB = action.text;
+            return newState;
+
+        case `SET_FAXB`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.faxB = action.text;
+            return newState;
+
+        case `SET_EMAILB`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.emailB = action.text;
+            return newState;
+
+        case `SET_NOTEB`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.notes = action.text;
+            return newState;
+
+        case `SET_FAX`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.fax = action.text;
+            return newState;
+
+
 
         default: return state;
     }

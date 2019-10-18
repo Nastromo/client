@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import NewDropDown from './NewDropDown';
-import SearchInput from './SearchInput';
 import PhyList from './PhyList';
-import { changeStreet, changeCity, changeZip, changePhone, changePhoneExt, changeEmail, changeStreetB, changeCityB, changeZipB, changePhoneB, changePhoneExtB, changeFaxB, changeEmailB, changeNotes } from '../store/actions/Clients';
+import { changeStreet, changeCity, changeZip, changePhone, changePhoneExt, changeEmail, changeStreetB, changeCityB, changeZipB, changePhoneB, changePhoneExtB, changeFaxB, changeEmailB, changeNotes, changeName, changeFax } from '../store/actions/Clients';
 
 
 
@@ -22,7 +21,7 @@ export class LocationData extends Component {
             <div className="flex">
                 <div className="bas50">
                     <p className="title-input-s">Client Location Name:</p>
-                    <input type="text" className="simple-input-s" />
+                    <input className="simple-input-s" value={loc.name ? loc.name : "" } onChange={this.props.changeName} />
                     <div className="flex ju-btw">
                         <div className="margrr">
                             <p className="title-input-s">Street:</p>
@@ -140,16 +139,6 @@ export class LocationData extends Component {
                 </div>
 
                 <div className="width100 marfge bas50">
-                    <p className="title-input-s">Physicians</p>
-                    <SearchInput
-                        id="phy"
-                        type="text"
-                        view="search-input-s"
-                        url="phy"
-                        onItemClick={this.props.addSpec}
-                        isLoading={this.props.isLoadSpec}
-                        searchQuery={this.props.searchSpec}
-                        searchResults={this.props.specimens} />
                     <PhyList />
                 </div>
 
@@ -162,8 +151,25 @@ const mapStateToProps = (state) => ({
     loc: state.loc,
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+    changeStreet: (e) => dispatch(changeStreet(e)),
+    changeCity: (e) => dispatch(changeCity(e)),
+    changeZip: (e) => dispatch(changeZip(e)),
+    changePhone: (e) => dispatch(changePhone(e)),
+    changePhoneExt: (e) => dispatch(changePhoneExt(e)),
+    changeEmail: (e) => dispatch(changeEmail(e)),
+    changeStreetB: (e) => dispatch(changeStreetB(e)),
+    changeCityB: (e) => dispatch(changeCityB(e)),
+    changeZipB: (e) => dispatch(changeZipB(e)),
+    changePhoneB: (e) => dispatch(changePhoneB(e)),
+    changePhoneExtB: (e) => dispatch(changePhoneExtB(e)),
+    changeFaxB: (e) => dispatch(changeFaxB(e)),
+    changeEmailB: (e) => dispatch(changeEmailB(e)),
+    changeNotes: (e) => dispatch(changeNotes(e)),
+    changeName: (e) => dispatch(changeName(e)),
+    changeFax: (e) => dispatch(changeFax(e)),
+    
+    
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationData)

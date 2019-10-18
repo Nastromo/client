@@ -4,7 +4,7 @@ import LocationsList from './LocationsList';
 import LocationData from './LocationData';
 import CheckBox from './Checkbox';
 import NewDropDown from './NewDropDown';
-import { changeLogin, changePass, handleLogUpdate } from '../store/actions/Clients';
+import { changeLogin, changePass, handleLogUpdate, showPdfPreview, bindPdf, handleUpdate } from '../store/actions/Clients';
 
 
 
@@ -17,13 +17,15 @@ export class LocationSettings extends Component {
 
     handleUpload = (e) => {
         const files = e.target.files;
-        let photos = [];
+        let pdfs = [];
         for (let i = 0; i < files.length; i++) {
-            photos.push({
+            pdfs.push({
                 url: URL.createObjectURL(files[i]),
                 title: files[i].name
             });
         }
+        this.props.showPdfPreview(pdfs);
+        this.props.bindPdf(files);
     }
 
     returnLogins = () => {
@@ -42,6 +44,8 @@ export class LocationSettings extends Component {
 
     render() {
         if (this.props.client) {
+            const pdfStr = this.props.client.pdf || "[]"; 
+            const pdf = JSON.parse(pdfStr);
             return (
                 <div>
                     <p className="title-input-s">Existing logins:</p>
@@ -97,12 +101,27 @@ export class LocationSettings extends Component {
                     </div>
 
                     <div className="file-upload">
+                        
                         <p className="title-img">Upload PDF</p>
+                        <div>
+                            {
+                                pdf.map((item, i) => {
+                                    return (
+                                        <div key={i} className="flex dargh al-cntd">
+                                            <a rel="noopener noreferrer" target="_blank" href={`/uploads/${item.url}`} className="dfert">
+                                                {item.title}
+                                            </a>
+                                            <div className="delete-sml"></div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                         <input type="file" onChange={this.handleUpload} multiple />
                     </div>
 
                     <div className="flex mafdd ju-end">
-                        <div className="green-btn">Update</div>
+                        <div onClick={this.props.handleUpdate} className="green-btn">Update</div>
                     </div>
                 </div>
             )
@@ -122,6 +141,9 @@ const mapDispatchToProps = dispatch => ({
     changeLogin: (e) => dispatch(changeLogin(e)),
     changePass: (e) => dispatch(changePass(e)),
     handleLogUpdate: (e) => dispatch(handleLogUpdate(e)),
+    showPdfPreview: (pdfs) => dispatch(showPdfPreview(pdfs)),
+    bindPdf: (files) => dispatch(bindPdf(files)),
+    handleUpdate: () => dispatch(handleUpdate()),
 })
 
 

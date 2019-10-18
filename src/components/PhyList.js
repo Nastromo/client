@@ -1,80 +1,59 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import ReactTable from "react-table";
-import '../table.css';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import SearchInput from './SearchInput';
+import { addPhy, delPhy } from '../store/actions/Clients';
 
 
-
-
-export class GroupList extends Component {
-
-    initColumns = () => {
-        return [
-            {
-                Header: 'ID',
-                accessor: 'id',
-            },
-            {
-                Header: 'Name',
-                accessor: 'name',
-            },
-            {
-                Header: 'NPI',
-                accessor: 'npi',
-            }
-        ];
-    }
-
-    handleRowClick = (state, rowInfo, column, instance) => {
-        if (rowInfo) {
-            return {
-                onClick: (e, handleOriginal) => this.props.showInstrum(Number(rowInfo.index)),
-                style: {
-                    fontWeight: rowInfo.index === this.props.selected ? '700' : '600',
-                    color: rowInfo.index === this.props.selected ? '#1ab394' : '#4e4e4e',
-                    background: rowInfo.index === this.props.selected ? '#e2fff9' : '',
-                }
-            }
-        } else {
-            return {}
-        }
-    }
-
-    handleCreate = () => {
-        this.props.createMode(true);
-    }
-
-    renderList = (list, text) => {
+export class PhyList extends Component {
+    render() {
         return (
-            <div className="content-table small-t basis50 marg-ty minus-mar">
-            
-                <ReactTable
-                    data={list}
-                    getTdProps={this.handleRowClick}
-                    columns={this.initColumns()}
-                    resizable={false}
-                    filterable={true}
-                    defaultPageSize={6}
-                    noDataText={text}
-                />
+            <div>
+                <p className="title-input-s">Physicians</p>
+                <SearchInput
+                    id="phy"
+                    type="text"
+                    view="search-input-s"
+                    url="phy"
+                    onItemClick={this.props.addPhy}
+                    isLoading={this.props.isLoadPhy}
+                    searchQuery={this.props.searchPhy}
+                    searchResults={this.props.phys} />
+                
+                <div className="flex tituj">
+                    <p className="bas30">ID</p>
+                    <p className="bas30">Name</p>
+                    <p className="bas30">NPI</p>
+                </div>
+                {
+                    this.props.list.map((item, i) => {
+                        return (
+                            <div key={i} className="flex al-cntd">
+                                <div className="line marguio">
+                                    <p className="bas30">{item.id}</p>
+                                    <p className="bas30">{item.name}</p>
+                                    <p className="bas30">{item.npi}</p>
+                                </div>
+                                <div id={item.id} onClick={this.props.delPhy} className="delete-sml"></div>
+                            </div>
+                        )
+                    })
+                }
             </div>
         )
-    }
-
-    render() {
-        if (this.props.isLoading) return this.renderList([], `Loading list...`);
-        if (this.props.isErrored) return this.renderList([], `Error occurred...`);
-        return this.renderList(this.props.list, `No any physicians...`);
     }
 }
 
 const mapStateToProps = (state) => ({
     list: state.physs,
-    selected: state.activeTestRow,
+    isLoadPhy: state.searchLoading.phy,
+    searchPhy: state.searchQuery.phy,
+    phys: state.searchResults.phy,
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    addPhy: (text) => dispatch(addPhy(text)),
+    delPhy: (e) => dispatch(delPhy(e)),
+    
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupList)
+export default connect(mapStateToProps, mapDispatchToProps)(PhyList)

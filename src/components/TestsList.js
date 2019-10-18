@@ -54,7 +54,7 @@ export class GroupList extends Component {
                         return (
                             <div key={i} className="flex marfgjj">
                                 <div className="line">
-                                    <p className="bas30">{item}</p>
+                                    <p className="bas95">{item}</p>
                                 </div>
                                 <div onClick={this.props.delOrder} id={i} className="delete-sml"></div>
                             </div>
