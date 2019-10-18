@@ -22,7 +22,7 @@ export class GroupSettings extends Component {
                     <div className="create-btn">Create</div>
                 </div>
 
-                <LocationSettings client={{}} />
+                <LocationSettings />
                 
 
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import NewDropDown from './NewDropDown';
 import SearchInput from './SearchInput';
 import PhyList from './PhyList';
+import { changeStreet, changeCity, changeZip, changePhone, changePhoneExt, changeEmail, changeStreetB, changeCityB, changeZipB, changePhoneB, changePhoneExtB, changeFaxB, changeEmailB, changeNotes } from '../store/actions/Clients';
 
 
 
@@ -16,6 +17,7 @@ export class LocationData extends Component {
 
 
     render() {
+        let loc = this.props.loc
         return (
             <div className="flex">
                 <div className="bas50">
@@ -24,7 +26,7 @@ export class LocationData extends Component {
                     <div className="flex ju-btw">
                         <div className="margrr">
                             <p className="title-input-s">Street:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.street ? loc.street : "" } onChange={this.props.changeStreet} />
                         </div>
 
                     </div>
@@ -32,7 +34,7 @@ export class LocationData extends Component {
                     <div className="flex ju-btw">
                         <div className="margrree">
                             <p className="title-input-s">City:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.city ? loc.city : "" } onChange={this.props.changeCity} />
                         </div>
                         <div className="margrree">
                             <p className="title-input-s">State:</p>
@@ -46,29 +48,29 @@ export class LocationData extends Component {
                         </div>
                         <div className="margrree">
                             <p className="title-input-s">Zip:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.zip ? loc.zip : "" } onChange={this.props.changeZip} />
                         </div>
                     </div>
 
                     <div className="flex ju-btw">
                         <div className="margrr">
                             <p className="title-input-s">Phone:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.phone ? loc.phone : "" } onChange={this.props.changePhone} />
                         </div>
                         <div className="margrr">
                             <p className="title-input-s">Phone Ext:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.phoneExt ? loc.phoneExt : "" } onChange={this.props.changePhoneExt} />
                         </div>
                     </div>
 
                     <div className="flex ju-btw">
                         <div className="margrr">
                             <p className="title-input-s">Fax #</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.fax ? loc.fax : "" } onChange={this.props.changeFax} />
                         </div>
                         <div className="margrr">
                             <p className="title-input-s">Email:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.email ? loc.email : "" } onChange={this.props.changeEmail} />
                         </div>
                     </div>
 
@@ -77,7 +79,7 @@ export class LocationData extends Component {
                     <div className="flex ju-btw">
                         <div className="margrr">
                             <p className="title-input-s">Street:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.streetB ? loc.streetB : "" } onChange={this.props.changeStreetB} />
                         </div>
 
                     </div>
@@ -85,7 +87,7 @@ export class LocationData extends Component {
                     <div className="flex ju-btw">
                         <div className="margrree">
                             <p className="title-input-s">City:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.cityB ? loc.cityB : "" } onChange={this.props.changeCityB} />
                         </div>
                         <div className="margrree">
                             <p className="title-input-s">State:</p>
@@ -99,29 +101,29 @@ export class LocationData extends Component {
                         </div>
                         <div className="margrree">
                             <p className="title-input-s">Zip:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.zipB ? loc.zipB : "" } onChange={this.props.changeZipB} />
                         </div>
                     </div>
 
                     <div className="flex ju-btw">
                         <div className="margrr">
                             <p className="title-input-s">Phone:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.phoneB ? loc.phoneB : "" } onChange={this.props.changePhoneB} />
                         </div>
                         <div className="margrr">
                             <p className="title-input-s">Phone Ext:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.phoneExtB ? loc.phoneExtB : "" } onChange={this.props.changePhoneExtB} />
                         </div>
                     </div>
 
                     <div className="flex ju-btw">
                         <div className="margrr">
                             <p className="title-input-s">Fax #</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.faxB ? loc.faxB : "" } onChange={this.props.changeFaxB} />
                         </div>
                         <div className="margrr">
                             <p className="title-input-s">Email:</p>
-                            <input type="text" className="simple-input-s" />
+                            <input className="simple-input-s" value={loc.emailB ? loc.emailB : "" } onChange={this.props.changeEmailB} />
                         </div>
                     </div>
 
@@ -129,7 +131,7 @@ export class LocationData extends Component {
                     <p className="title-input-s">Notes</p>
                     <textarea
                         className="gross-other-s"
-                        value={this.props.notes}
+                        value={this.props.loc.notes}
                         onChange={this.props.changeNotes}
                     ></textarea>
                     <div className="flex mafdd ju-end">
@@ -157,7 +159,7 @@ export class LocationData extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    loc: state.loc,
 })
 
 const mapDispatchToProps = {

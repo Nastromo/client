@@ -40,6 +40,44 @@ export const check = (obj) => {
                 obj
             }
 
+        case `inhouse`:
+            return {
+                type: 'CHECK_BOX_SET',
+                obj
+            }
+
+        case `fix`:
+            return {
+                type: 'CHECK_BOX_SET',
+                obj
+            }
+
+        case `remote`:
+            return {
+                type: 'CHECK_BOX_SET',
+                obj
+            }
+
+        case `emre`:
+            return {
+                type: 'CHECK_BOX_SET',
+                obj
+            }
+
+        case `his`:
+        case `ngyn`:
+        case `fish`:
+        case `gyn`:
+        case `inh`:
+        case `acls`:
+        case `heart`:
+        case `dtex`:
+        case `igse`:
+            return {
+                type: 'CHECK_BOX_SET',
+                obj
+            }
+
 
 
 

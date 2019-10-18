@@ -11,12 +11,16 @@ import { actRow, activePhyRaw } from '../reducers/ActiveRow';
 import { locs } from '../reducers/Locs';
 import { phys, phy, isCreateModePhy } from '../reducers/Phys';
 import { tabact } from '../reducers/Tabs';
-import { clients, client } from '../reducers/Clients';
+import { clients, client, activeClientRow, loc, activeLocRow, physs } from '../reducers/Clients';
 
 
 
 
 const RootReducer = combineReducers({
+    physs,
+    activeLocRow,
+    loc,
+    activeClientRow,
     client,
     clients,
     activePhyRaw,

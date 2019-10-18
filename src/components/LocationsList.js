@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import '../table.css';
+import { showLoc } from '../store/actions/Clients';
 
 
 
@@ -12,15 +13,15 @@ export class GroupList extends Component {
         return [
             {
                 Header: 'Client Location ID',
-                accessor: 'locId',
+                accessor: 'id',
             },
             {
                 Header: 'Name',
-                accessor: 'clientName',
+                accessor: 'name',
             },
             {
-                Header: 'Address',
-                accessor: 'address',
+                Header: 'Street',
+                accessor: 'street',
             }
         ];
     }
@@ -28,7 +29,7 @@ export class GroupList extends Component {
     handleRowClick = (state, rowInfo, column, instance) => {
         if (rowInfo) {
             return {
-                onClick: (e, handleOriginal) => this.props.showInstrum(Number(rowInfo.index)),
+                onClick: (e, handleOriginal) => this.props.showLoc(Number(rowInfo.index)),
                 style: {
                     fontWeight: rowInfo.index === this.props.selected ? '700' : '600',
                     color: rowInfo.index === this.props.selected ? '#1ab394' : '#4e4e4e',
@@ -72,13 +73,12 @@ export class GroupList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    // list: state.tests,
-    list: [],
-    selected: state.activeTestRow,
+    list: state.client.locs,
+    selected: state.activeLocRow,
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    showLoc: (i) => dispatch(showLoc(i))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

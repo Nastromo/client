@@ -69,8 +69,7 @@ export class GroupList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    // list: state.tests,
-    list: [],
+    list: state.physs,
     selected: state.activeTestRow,
 })
 

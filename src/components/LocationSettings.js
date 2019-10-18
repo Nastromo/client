@@ -51,7 +51,7 @@ export class LocationSettings extends Component {
 
 
                     <LocationsList />
-                    <LocationData location={{}} />
+                    <LocationData />
                     <div className="mar-rad">
                         <p className="title-input-s">Sales Group ID</p>
                         <input type="text" className="simple-input-s" />
@@ -72,27 +72,27 @@ export class LocationSettings extends Component {
                                     height="30px"
                                     status={this.props.isOpenStat}
                                     menu={this.stats}
-                                    option={this.props.stat} />
+                                    option={this.props.client.repOpt} />
                             </div>
-                            <div className="mafgrte"><CheckBox status={false} title="Inhouse Print" id="inhouse" /></div>
-                            <div className="mafgrte"><CheckBox status={false} title="Auto Fax" id="fix" /></div>
-                            <div className="mafgrte"><CheckBox status={false} title="Remote Print" id="remote" /></div>
-                            <div className="mafgrte"><CheckBox status={false} title="EMR" id="emr" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.inPrint} title="Inhouse Print" id="inhouse" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.autFax} title="Auto Fax" id="fix" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.remPrint} title="Remote Print" id="remote" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.emr} title="EMR" id="emre" /></div>
                         </div>
                     </div>
 
                     <div className="bhgrt">
                         <p className="title-input-s">Color Report</p>
                         <div className="flex adfefd">
-                            <div className="mafgrte"><CheckBox status={true} title="Histology" id="his" /></div>
-                            <div className="mafgrte"><CheckBox status={true} title="NGYN Cytology" id="ngyn" /></div>
-                            <div className="mafgrte"><CheckBox status={true} title="Fish Cytology" id="fish" /></div>
-                            <div className="mafgrte"><CheckBox status={true} title="GYN Cytology" id="gyn" /></div>
-                            <div className="mafgrte"><CheckBox status={true} title="In-House" id="inh" /></div>
-                            <div className="mafgrte"><CheckBox status={true} title="ACLS" id="acls" /></div>
-                            <div className="mafgrte"><CheckBox status={true} title="Heart Smart" id="heart" /></div>
-                            <div className="mafgrte"><CheckBox status={true} title="D Tex" id="dtex" /></div>
-                            <div className="mafgrte"><CheckBox status={true} title="IGS" id="igs" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.histology} title="Histology" id="his" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.ngyn} title="NGYN Cytology" id="ngyn" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.fish} title="Fish Cytology" id="fish" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.gyn} title="GYN Cytology" id="gyn" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.inHouse} title="In-House" id="inh" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.acls} title="ACLS" id="acls" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.heartSmart} title="Heart Smart" id="heart" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.dtex} title="D Tex" id="dtex" /></div>
+                            <div className="mafgrte"><CheckBox status={this.props.client.igs} title="IGS" id="igse" /></div>
                         </div>
                     </div>
 
@@ -113,7 +113,9 @@ export class LocationSettings extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    client: state.client,
     logins: state.client.logins,
+    isOpenStat: state.newDDStatus.statu,
 })
 
 const mapDispatchToProps = dispatch => ({
