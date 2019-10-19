@@ -33,8 +33,8 @@ export class LocationSettings extends Component {
             return this.props.logins.map((item, i) => {
                 return (
                     <div key={i} className="flex margoi">
-                        <input id={i} type="text" className="simple-input-s ma-rg" value={item.login} onChange={this.props.changeLogin} />
-                        <input id={i} type="text" className="simple-input-s ma-rg" value={item.pass} onChange={this.props.changePass} />
+                        <input id={i} type="text" className="simple-input-s ma-rg" value={item.login ? item.login : ""} onChange={this.props.changeLogin} />
+                        <input id={i} type="text" className="simple-input-s ma-rg" value={item.pass ?  item.pass : ""} onChange={this.props.changePass} />
                         <div id={i} onClick={this.props.handleLogUpdate} className="green-btn">Update</div>
                     </div>
                 )
@@ -55,7 +55,8 @@ export class LocationSettings extends Component {
 
 
                     <LocationsList />
-                    <LocationData />
+                    {this.props.loc ? <LocationData /> : null}
+                    
                     <div className="mar-rad">
                         <p className="title-input-s">Sales Group ID</p>
                         <input type="text" className="simple-input-s" />
@@ -108,7 +109,7 @@ export class LocationSettings extends Component {
                                 pdf.map((item, i) => {
                                     return (
                                         <div key={i} className="flex dargh al-cntd">
-                                            <a rel="noopener noreferrer" target="_blank" href={`/uploads/${item.url}`} className="dfert">
+                                            <a rel="noopener noreferrer" target="_blank" href={`/uploads?title=${item.url}`} className="dfert">
                                                 {item.title}
                                             </a>
                                             <div className="delete-sml"></div>
@@ -133,8 +134,9 @@ export class LocationSettings extends Component {
 
 const mapStateToProps = (state) => ({
     client: state.client,
-    logins: state.client.logins,
+    logins: state.logins,
     isOpenStat: state.newDDStatus.statu,
+    loc: state.loc
 })
 
 const mapDispatchToProps = dispatch => ({

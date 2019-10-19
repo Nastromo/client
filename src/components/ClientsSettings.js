@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LocationSettings from './LocationSettings';
+import { changeClientName, createLogin } from '../store/actions/Clients';
 
 
 
 
 export class GroupSettings extends Component {
-    constructor(props) {
-        super(props);
-        this.time = [`8:30am`, `9:30am`];
+    createLogin = (e) => {
+        if (this.login.value && this.pass.value) {
+            this.props.createLogin(this.login.value, this.pass.value);
+        }
     }
 
     render() {
         return (
             <div className="driv-set">
                 <p className="title-input-s">Client Name:</p>
-                <input type="text" className="simple-input-s" />
+                <input className="simple-input-s" value={this.props.client.title ? this.props.client.title : ""} onChange={this.props.changeClientName}/>
                 <div className="flex marg-k">
-                    <input type="text" className="simple-input-s ma-rg" placeholder="login" />
-                    <input type="text" className="simple-input-s ma-rg" placeholder="password" />
-                    <div className="create-btn">Create</div>
+                    <input ref={el => this.login = el} className="simple-input-s ma-rg" placeholder="login" />
+                    <input ref={el => this.pass = el} className="simple-input-s ma-rg" placeholder="password" />
+                    <div onClick={this.createLogin} className="create-btn">Create</div>
                 </div>
 
                 <LocationSettings />
@@ -38,13 +40,12 @@ export class GroupSettings extends Component {
 
 
 const mapStateToProps = (state) => ({
-    rep: {},
-    isOpenTime: state.newDDStatus.time,
-    optionTime: {}.time,
+    client: state.client,
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+    changeClientName: (e) => dispatch(changeClientName(e)),
+    createLogin: (login, pass) => dispatch(createLogin(login, pass)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupSettings)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import NewDropDown from './NewDropDown';
 import PhyList from './PhyList';
-import { changeStreet, changeCity, changeZip, changePhone, changePhoneExt, changeEmail, changeStreetB, changeCityB, changeZipB, changePhoneB, changePhoneExtB, changeFaxB, changeEmailB, changeNotes, changeName, changeFax } from '../store/actions/Clients';
+import { changeStreet, changeCity, changeZip, changePhone, changePhoneExt, changeEmail, changeStreetB, changeCityB, changeZipB, changePhoneB, changePhoneExtB, changeFaxB, changeEmailB, changeNotes, changeName, changeFax, handleLocUpdate } from '../store/actions/Clients';
 
 
 
@@ -16,7 +16,7 @@ export class LocationData extends Component {
 
 
     render() {
-        let loc = this.props.loc
+        let loc = this.props.loc;
         return (
             <div className="flex">
                 <div className="bas50">
@@ -134,7 +134,7 @@ export class LocationData extends Component {
                         onChange={this.props.changeNotes}
                     ></textarea>
                     <div className="flex mafdd ju-end">
-                        <div className="green-btn">Update</div>
+                        <div onClick={this.props.handleLocUpdate} className="green-btn">Update</div>
                     </div>
                 </div>
 
@@ -149,6 +149,7 @@ export class LocationData extends Component {
 
 const mapStateToProps = (state) => ({
     loc: state.loc,
+    createLoc: state.createLoc,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -168,6 +169,7 @@ const mapDispatchToProps = dispatch => ({
     changeNotes: (e) => dispatch(changeNotes(e)),
     changeName: (e) => dispatch(changeName(e)),
     changeFax: (e) => dispatch(changeFax(e)),
+    handleLocUpdate: (e) => dispatch(handleLocUpdate(e))
     
     
 })

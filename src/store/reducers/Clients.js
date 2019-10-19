@@ -16,15 +16,53 @@ export const files = (state = ``, action) => {
     }
 }
 
-export const client = (state = {}, action) => {
+export const createLoc = (state = false, action) => {
+    switch (action.type) {
+        case `CREATE_LOC_MODE`:
+            return action.bool;
+
+        default: return state;
+    }
+}
+
+export const logins = (state = [], action) => {
+    let newState;
+    switch (action.type) {
+        case `SET_CLIENT_LOGINS`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState = action.list
+            return newState;
+
+        case `CHANGE_LOGIN`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState[action.index].login = action.text;
+            return newState;
+
+        case `CHANGE_PASS`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState[action.index].pass = action.text;
+            return newState;
+
+        default: return state;
+    }
+}
+
+export const client = (state = null, action) => {
     let newState;
     switch (action.type) {
         case `SET_CLIENT`:
-            return action.obj;
+            newState = JSON.parse(JSON.stringify(state));
+            newState = action.obj
+            return newState;
 
         case `SET_STAT_OPTION`:
             newState = JSON.parse(JSON.stringify(state));
             newState.repOpt = action.obj.option;
+            return newState;
+
+        case `SET_CLIENT_NAME`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.title = action.text;
             return newState;
 
         case `SET_PDF`:
@@ -106,7 +144,7 @@ export const activeClientRow = (state = null, action) => {
     }
 }
 
-export const loc = (state = {}, action) => {
+export const loc = (state = null, action) => {
     let newState;
     switch (action.type) {
         case `SET_LOC`:

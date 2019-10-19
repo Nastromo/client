@@ -10,14 +10,15 @@ export class Clients extends Component {
         return (
             <div className="flex main-d">
                 <ClientsList />
-                <ClientsSettings />
+                {this.props.client ? <ClientsSettings /> : null}
+                
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    
+    client: state.client
 })
 
 const mapDispatchToProps = {

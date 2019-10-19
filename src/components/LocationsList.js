@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import '../table.css';
-import { showLoc } from '../store/actions/Clients';
+import { showLoc, createLocMode } from '../store/actions/Clients';
 
 
 
@@ -42,7 +42,7 @@ export class GroupList extends Component {
     }
 
     handleCreate = () => {
-        this.props.createMode(true);
+        this.props.createLocMode(true);
     }
 
     renderList = (list, text) => {
@@ -50,7 +50,7 @@ export class GroupList extends Component {
             <div className="content-table small-t basis50 marg-ty">
                 <p className="title-input-s martt-t">Locations:</p>
                 <div className="flex ghty">
-                    <div className="create-btn">Create</div>
+                    <div onClick={this.handleCreate} className="create-btn">Create</div>
                 </div>
                 <ReactTable
                     data={list}
@@ -78,7 +78,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    showLoc: (i) => dispatch(showLoc(i))
+    showLoc: (i) => dispatch(showLoc(i)),
+    createLocMode: (bool) => dispatch(createLocMode(bool)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

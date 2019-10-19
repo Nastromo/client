@@ -48,11 +48,13 @@ const mapStateToProps = (state) => ({
     isLoadPhy: state.searchLoading.phy,
     searchPhy: state.searchQuery.phy,
     phys: state.searchResults.phy,
+    createLoc: state.createLoc,
 })
 
 const mapDispatchToProps = dispatch => ({
     addPhy: (text) => dispatch(addPhy(text)),
     delPhy: (e) => dispatch(delPhy(e)),
+    
     
 })
 

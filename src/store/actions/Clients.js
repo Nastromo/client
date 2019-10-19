@@ -18,6 +18,27 @@ export const setActiveClientRow = (index) => ({
     index
 });
 
+export const changeClientName = (e) => ({
+    type: 'SET_CLIENT_NAME',
+    text: e.target.value
+});
+
+export const setLogins = (list) => ({
+    type: 'SET_CLIENT_LOGINS',
+    list
+});
+
+export const createLocMode = (i) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch(setLoc({}));
+            dispatch(setPhys([]));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
 export const showClient = (i) => {
     return async (dispatch, getState) => {
         try {
@@ -26,14 +47,63 @@ export const showClient = (i) => {
             dispatch(setActiveClientRow(i));
             const logins = await API.get(`/v1/logins?id=${client.id}`);
             const locs = await API.get(`/v1/locations?id=${client.id}`);
-            client.logins = logins.data;
             client.locs = locs.data;
             dispatch(setClient(client));
+            dispatch(setLogins(logins.data));
         } catch (err) {
             console.log(err);
         }
     }
 }
+
+export const createLogin = (login, pass) => {
+    return async (dispatch, getState) => {
+        try {
+            const client = getState().client;
+            const logins = await API.post(`/v1/logins`, {
+                clientId: client.id,
+                login,
+                pass
+            });
+            dispatch(showNotification(`Login created!`, `notification-green`));
+            dispatch(setLogins(logins.data));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+export const handleLogUpdate = (e) => {
+    return async (dispatch, getState) => {
+        try {
+            const id = getState().logins[e.target.id].id;
+            const login = getState().logins[e.target.id].login;
+            const pass = getState().logins[e.target.id].pass;
+            await API.put(`/v1/logins`, {
+                id, 
+                login,
+                pass
+            });
+            dispatch(showNotification(`Login updated!`, `notification-blue`));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+export const handleLocUpdate = (e) => {
+    return async (dispatch, getState) => {
+        try {
+            const loc = getState().loc
+            await API.put(`/v1/locations`, loc);
+            dispatch(showNotification(`Location updated!`, `notification-blue`));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+
 
 export const handleUpdate = (i) => {
     return async (dispatch, getState) => {
@@ -68,27 +138,14 @@ export const getClients = () => {
     }
 }
 
-export const handleLogUpdate = (e) => {
-    return async (dispatch, getState) => {
-        try {
-            const i = e.target.id;
-            const logins = getState().client.logins;
-            await API.post(`/v1/logins`, logins[i]);
-            dispatch(showNotification(`Updated!`, `notification-blue`));
-        } catch (err) {
-            console.log(err);
-        }
-    }
-}
-
 export const changeLogin = (e) => ({
-    type: 'SET_CLIENT',
+    type: 'CHANGE_LOGIN',
     text: e.target.value,
     index: e.target.id,
 });
 
 export const changePass = (e) => ({
-    type: 'SET_CLIENT',
+    type: 'CHANGE_PASS',
     text: e.target.value,
     index: e.target.id,
 });

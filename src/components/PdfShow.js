@@ -4,13 +4,17 @@ import { connect } from 'react-redux'
 
 export class PdfShow extends Component {
     render() {
-        const url = window.location.href;
-        console.log(url);
+        let params = (new URL(window.location.href)).searchParams;
+        let title = params.get('title');
+        let port = 8050;
+        if (window.location.href.includes(`localhost`)) {
+            port = 9000;
+        }
         return (
             <div>
-                <embed src="http://www.africau.edu/images/default/sample.pdf" width="100%" height="1000px" />
-                
-                
+                <embed src={`http://localhost:${port}/${title}`} width="100%" height="1000px" />
+
+
             </div>
 
         )
