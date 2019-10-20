@@ -166,6 +166,16 @@ export const loc = (state = null, action) => {
         case `SET_LOC`:
             return action.obj;
 
+        case `SET_STATE_OPTION`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.state = action.obj.option;
+            return newState;
+
+        case `SET_STATEB_OPTION`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.stateB = action.obj.option;
+            return newState;
+
         case `SET_NAME`:
             newState = JSON.parse(JSON.stringify(state));
             newState.name = action.text;

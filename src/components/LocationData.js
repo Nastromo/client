@@ -11,7 +11,7 @@ import { changeStreet, changeCity, changeZip, changePhone, changePhoneExt, chang
 export class LocationData extends Component {
     constructor(props) {
         super(props);
-        this.types = [`option1`, `option2`]
+        this.states = [`AL`, `AK`, `AZ`, `AR`, `CA`, `CO`, `CT`, `DE`, `FL`, `GA`, `HI`, `ID`, `IL`, `IN`, `IA`, `KS`, `KY`, `LA`, `ME`, `MD`, `MA`, `MI`, `MN`, `MS`, `MO`, `MT`, `NE`, `NV`, `NH`, `NJ`, `NM`, `NY`, `NC`, `ND`, `OH`, `OK`, `OR`, `PA`, `RI`, `SC`, `SD`, `TN`, `TX`, `UT`, `VT`, `VA`, `WA`, `WV`, `WI`, `WY`];
     }
 
 
@@ -38,12 +38,12 @@ export class LocationData extends Component {
                         <div className="margrree">
                             <p className="title-input-s">State:</p>
                             <NewDropDown
-                                id="time"
-                                actionType="SET_UNIT_OPTION"
+                                id="states"
+                                actionType="SET_STATE_OPTION"
                                 height="30px"
-                                status={this.props.isOpenTime}
-                                menu={this.types}
-                                option={this.props.type} />
+                                status={this.props.isOpenState}
+                                menu={this.states}
+                                option={this.props.loc.state} />
                         </div>
                         <div className="margrree">
                             <p className="title-input-s">Zip:</p>
@@ -91,12 +91,12 @@ export class LocationData extends Component {
                         <div className="margrree">
                             <p className="title-input-s">State:</p>
                             <NewDropDown
-                                id="time"
-                                actionType="SET_UNIT_OPTION"
+                                id="statesB"
+                                actionType="SET_STATEB_OPTION"
                                 height="30px"
-                                status={this.props.isOpenTime}
-                                menu={this.types}
-                                option={this.props.type} />
+                                status={this.props.isOpenStatesB}
+                                menu={this.states}
+                                option={this.props.loc.stateB} />
                         </div>
                         <div className="margrree">
                             <p className="title-input-s">Zip:</p>
@@ -152,6 +152,8 @@ export class LocationData extends Component {
 const mapStateToProps = (state) => ({
     loc: state.loc,
     createLoc: state.createLoc,
+    isOpenState: state.newDDStatus.states,
+    isOpenStatesB: state.newDDStatus.statesB,
 })
 
 const mapDispatchToProps = dispatch => ({
