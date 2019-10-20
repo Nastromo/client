@@ -65,7 +65,7 @@ export const phy = (state = {}, action) => {
             newState.npi = action.text;
             return newState;
 
-        case `SET_NAME`:
+        case `SET_NAME_PHY`:
             newState = JSON.parse(JSON.stringify(state));
             newState.name = action.text;
             return newState;

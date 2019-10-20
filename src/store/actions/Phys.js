@@ -60,7 +60,7 @@ export const changeNpi = (e) => ({
 });
 
 export const changeName = (e) => ({
-    type: 'SET_NAME',
+    type: 'SET_NAME_PHY',
     text: e.target.value
 });
 
