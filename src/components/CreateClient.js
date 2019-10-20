@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LocationSettings from './LocationSettings';
-import { changeClientName, createLogin } from '../store/actions/Clients';
+import { createLoginSep } from '../store/actions/Clients';
 
 
 
 
-export class GroupSettings extends Component {
+export class CreateClient extends Component {
     createLogin = (e) => {
-        if (this.login.value && this.pass.value) {
-            this.props.createLogin(this.login.value, this.pass.value);
+        if (this.login.value && this.pass.value && this.title.value) {
+            this.props.createLoginSep(this.title.value, this.login.value, this.pass.value);
         }
     }
 
@@ -17,24 +16,12 @@ export class GroupSettings extends Component {
         return (
             <div className="driv-set">
                 <p className="title-input-s">Client Name:</p>
-                <input className="simple-input-s" value={this.props.client ? this.props.client.title : ""} onChange={this.props.changeClientName} />
+                <input className="simple-input-s" ref={el => this.title = el} />
                 <div className="flex marg-k">
                     <input ref={el => this.login = el} className="simple-input-s ma-rg" placeholder="login" />
                     <input ref={el => this.pass = el} className="simple-input-s ma-rg" placeholder="password" />
                     <div onClick={this.createLogin} className="create-btn">Create</div>
                 </div>
-
-                {
-                    this.props.client.id ? <LocationSettings /> : null
-                }
-                    
-
-
-
-
-
-
-
 
             </div>
         )
@@ -48,8 +35,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    changeClientName: (e) => dispatch(changeClientName(e)),
-    createLogin: (login, pass) => dispatch(createLogin(login, pass)),
+    createLoginSep: (title, login, pass) => dispatch(createLoginSep(title, login, pass)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupSettings)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateClient)

@@ -45,6 +45,22 @@ export const createLocMode = (bool) => {
     }
 }
 
+export const setClientMode = (bool) => ({
+    type: 'CREATE_CLIENT_MODE',
+    bool
+});
+
+export const createClientMode = (bool) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch(setClient(null));
+            dispatch(setClientMode(bool));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
 export const showClient = (i) => {
     return async (dispatch, getState) => {
         try {
@@ -54,6 +70,7 @@ export const showClient = (i) => {
             const logins = await API.get(`/v1/logins?id=${client.id}`);
             const locs = await API.get(`/v1/locations?id=${client.id}`);
             client.locs = locs.data;
+            dispatch(setClientMode(false));
             dispatch(setClient(client));
             dispatch(setLogins(logins.data));
         } catch (err) {
@@ -78,6 +95,27 @@ export const createLogin = (login, pass) => {
         }
     }
 }
+
+export const createLoginSep = (title, login, pass) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await API.post(`/v1/logins`, {
+                title,
+                login,
+                pass
+            });
+            dispatch(showNotification(`Client created!`, `notification-green`));
+            dispatch(setClients(res.data.clients));
+            dispatch(setActiveClientRow(0));
+            dispatch(setClient(res.data.clients[0]));
+            dispatch(setLogins(res.data.logins));
+            dispatch(setClientMode(false));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
 
 export const handleLogUpdate = (e) => {
     return async (dispatch, getState) => {

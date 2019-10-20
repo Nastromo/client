@@ -25,6 +25,15 @@ export const createLoc = (state = false, action) => {
     }
 }
 
+export const createClient = (state = false, action) => {
+    switch (action.type) {
+        case `CREATE_CLIENT_MODE`:
+            return action.bool;
+
+        default: return state;
+    }
+}
+
 export const logins = (state = [], action) => {
     let newState;
     switch (action.type) {

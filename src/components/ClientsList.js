@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import '../table.css';
-import { getClients, showClient } from '../store/actions/Clients';
+import { getClients, showClient, createClientMode } from '../store/actions/Clients';
 
 
 
@@ -40,13 +40,13 @@ export class GroupList extends Component {
     }
 
     handleCreate = () => {
-        this.props.createMode(true);
+        this.props.createClientMode(true);
     }
 
     renderList = (list, text) => {
         return (
             <div className="content-table small-t basis37">
-                <div className="create-btn">Create</div>
+                <div onClick={this.handleCreate} className="create-btn">Create</div>
                 <ReactTable
                     data={list}
                     getTdProps={this.handleRowClick}
@@ -75,6 +75,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => ({
     getClients: () => dispatch(getClients()),
     showClient: (i) => dispatch(showClient(i)),
+    createClientMode: (bool) => dispatch(createClientMode(bool))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ClientsList from './ClientsList';
 import ClientsSettings from './ClientsSettings';
+import CreateClient from './CreateClient';
 
 
 
@@ -11,6 +12,7 @@ export class Clients extends Component {
             <div className="flex main-d">
                 <ClientsList />
                 {this.props.client ? <ClientsSettings /> : null}
+                {this.props.createClient ? <CreateClient /> : null}
                 
             </div>
         )
@@ -18,7 +20,8 @@ export class Clients extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    client: state.client
+    client: state.client,
+    createClient: state.createClient
 })
 
 const mapDispatchToProps = {
