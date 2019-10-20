@@ -48,7 +48,7 @@ export const logins = (state = [], action) => {
 }
 
 export const client = (state = null, action) => {
-    let newState;
+    let newState, pdfs;
     switch (action.type) {
         case `SET_CLIENT`:
             newState = JSON.parse(JSON.stringify(state));
@@ -67,10 +67,17 @@ export const client = (state = null, action) => {
 
         case `SET_PDF`:
             newState = JSON.parse(JSON.stringify(state));
-            const pdfs = JSON.parse(newState.pdf ? newState.pdf : "[]");
+            pdfs = JSON.parse(newState.pdf ? newState.pdf : "[]");
             for (let i = 0; i < action.files.length; i++) {
                 pdfs.push(action.files[i]);
             }
+            newState.pdf = JSON.stringify(pdfs);
+            return newState;
+
+        case `DEL_PDF`:
+            newState = JSON.parse(JSON.stringify(state));
+            pdfs = JSON.parse(newState.pdf ? newState.pdf : "[]");
+            pdfs.splice(action.index, 1);
             newState.pdf = JSON.stringify(pdfs);
             return newState;
 

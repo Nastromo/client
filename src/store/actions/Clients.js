@@ -28,11 +28,17 @@ export const setLogins = (list) => ({
     list
 });
 
-export const createLocMode = (i) => {
+export const setLocMode = (bool) => ({
+    type: 'CREATE_LOC_MODE',
+    bool
+});
+
+export const createLocMode = (bool) => {
     return async (dispatch, getState) => {
         try {
             dispatch(setLoc({}));
             dispatch(setPhys([]));
+            dispatch(setLocMode(bool));
         } catch (err) {
             console.log(err);
         }
@@ -91,6 +97,25 @@ export const handleLogUpdate = (e) => {
     }
 }
 
+export const handleLocCreate = () => {
+    return async (dispatch, getState) => {
+        try {
+            const loc = getState().loc;
+            const client = getState().client;
+            loc.clientId = client.id;
+            const locs = await API.post(`/v1/locations`, loc);
+            client.locs = locs.data;
+            dispatch(showNotification(`Location created!`, `notification-green`));
+            dispatch(setClient(client));
+            dispatch(setLoc(locs.data[0]));
+            dispatch(setLocMode(false));
+            dispatch(setActiveLocRow(0));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
 export const handleLocUpdate = (e) => {
     return async (dispatch, getState) => {
         try {
@@ -103,24 +128,25 @@ export const handleLocUpdate = (e) => {
     }
 }
 
-
-
 export const handleUpdate = (i) => {
     return async (dispatch, getState) => {
         try {
-            
-            const fd = new FormData();
+            const client = getState().client;
             const files = getState().files;
+            delete client.locs;
+            await API.put(`/v1/clients`, client);
 
-            for (let j = 0; j < files.length; j++) {
-                fd.append(`pdf`, files[j]);
+            if (files.length > 0) {
+                const fd = new FormData();
+                for (let j = 0; j < files.length; j++) {
+                    fd.append(`pdf`, files[j]);
+                }
+                await API.post(`/v1/pdf?id=${client.id}`, fd, {
+                    'Content-Type': `multipart/form-data`
+                });
             }
-            
-            const clients = await API.post(`/v1/pdf`, fd, {
-                'Content-Type': `multipart/form-data`
-            });
-            
-            dispatch(setClients(clients.data));
+
+            dispatch(showNotification(`Client updated!`, `notification-blue`));
         } catch (err) {
             console.log(err);
         }
@@ -301,5 +327,10 @@ export const bindPdf = (files) => ({
 export const setPdf = (files) => ({
     type: 'SET_EDITED_PDF',
     files
+});
+
+export const delFile = (e) => ({
+    type: 'DEL_PDF',
+    index: e.target.id
 });
 

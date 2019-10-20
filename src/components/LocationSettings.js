@@ -4,7 +4,7 @@ import LocationsList from './LocationsList';
 import LocationData from './LocationData';
 import CheckBox from './Checkbox';
 import NewDropDown from './NewDropDown';
-import { changeLogin, changePass, handleLogUpdate, showPdfPreview, bindPdf, handleUpdate } from '../store/actions/Clients';
+import { changeLogin, changePass, handleLogUpdate, showPdfPreview, bindPdf, delFile, handleUpdate } from '../store/actions/Clients';
 
 
 
@@ -112,7 +112,7 @@ export class LocationSettings extends Component {
                                             <a rel="noopener noreferrer" target="_blank" href={`/uploads?title=${item.url}`} className="dfert">
                                                 {item.title}
                                             </a>
-                                            <div className="delete-sml"></div>
+                                            <div id={i} onClick={this.props.delFile} className="delete-sml"></div>
                                         </div>
                                     )
                                 })
@@ -146,6 +146,7 @@ const mapDispatchToProps = dispatch => ({
     showPdfPreview: (pdfs) => dispatch(showPdfPreview(pdfs)),
     bindPdf: (files) => dispatch(bindPdf(files)),
     handleUpdate: () => dispatch(handleUpdate()),
+    delFile: (e) => dispatch(delFile(e)),
 })
 
 
