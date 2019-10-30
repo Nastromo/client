@@ -26,6 +26,9 @@ export class Navigation extends Component {
             case `/account/physitians`:
                 this.setActive(this.phy);
                 break;
+            case `/account/efunc`:
+                this.setActive(this.option6);
+                break;
 
             default: break;
         }
@@ -48,6 +51,9 @@ export class Navigation extends Component {
             case `option5`:
                 this.setActive(this.locs);
                 break;
+            case `option6`:
+                this.setActive(this.option6);
+                break;
             default: break;
         }
     }
@@ -62,7 +68,7 @@ export class Navigation extends Component {
                 <div className="main-nav">
                     <div className="main-categories">
                         <p className="logo-text">Client Service</p>
-                        <Link
+                        {/* <Link
                             id="option1"
                             onClick={this.handleClick}
                             innerRef={el => this.pending = el}
@@ -87,7 +93,13 @@ export class Navigation extends Component {
                             id="option5"
                             onClick={this.handleClick}
                             innerRef={el => this.locs = el}
-                            to="/account/locs">Clients Locations List</Link>
+                            to="/account/locs">Clients Locations List</Link> */}
+                        <Link
+                            id="option6"
+                            onClick={this.handleClick}
+                            innerRef={el => this.option6 = el}
+                            className="menu-active"
+                            to="/account/efunc">E-func</Link>
                     </div>
 
                     <div className="work-info">

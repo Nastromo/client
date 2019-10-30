@@ -2164,3 +2164,44 @@ p.logo-text:hover {
     margin: 3px 5px 3px 0;
     text-decoration: none;
 }
+
+.main-div {
+    margin: 15px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #dadada;  
+}
+
+.marghjo {
+    margin: 0 0 10px 0;
+}
+
+.fhgyt {
+    border: 1px solid #dadada;
+    width: 100%;
+    padding: 15px;
+}
+
+.dfrt {
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.hgyt {
+    justify-content: flex-end;
+    margin: 10px 0 0 0;
+}
+
+.grn-btn {
+    border-radius: 3px;
+    background: #1ab394;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    height: 30px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

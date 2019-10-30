@@ -8,6 +8,7 @@ import Clients from './Clients';
 import Physitians from './Physitians';
 import Navigation from './Navigation';
 import Locs from './Locs';
+import Efunc from './Efunc';
 
 
 
@@ -28,6 +29,7 @@ export class PrivateRoute extends Component {
                     <Route exact path="/account/clients" component={Clients} />
                     <Route exact path="/account/physitians" component={Physitians} />
                     <Route exact path="/account/locs" component={Locs} />
+                    <Route exact path="/account/efunc" component={Efunc} />
                     
                 </Switch>
             </div>
