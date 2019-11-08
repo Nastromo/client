@@ -2192,6 +2192,10 @@ p.logo-text:hover {
     margin: 10px 0 0 0;
 }
 
+.mar-ri-15 {
+    margin: 0 15px 0 0;
+}
+
 .grn-btn {
     border-radius: 3px;
     background: #1ab394;
@@ -2204,4 +2208,22 @@ p.logo-text:hover {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+
+.ord-tit {
+    display: flex;
+    padding: 3px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: #e6e6e6;
+    width: 100%;
+}
+
+.bas25 {
+    flex-basis: 25%;
+}
+
+.ferof {
+    height: 110px;
+    overflow: auto;
 }

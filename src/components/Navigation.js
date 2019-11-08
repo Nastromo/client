@@ -68,7 +68,7 @@ export class Navigation extends Component {
                 <div className="main-nav">
                     <div className="main-categories">
                         <p className="logo-text">Client Service</p>
-                        {/* <Link
+                        <Link
                             id="option1"
                             onClick={this.handleClick}
                             innerRef={el => this.pending = el}
@@ -79,7 +79,7 @@ export class Navigation extends Component {
                             onClick={this.handleClick}
                             innerRef={el => this.processing = el}
                             to="/account/groups">Groups</Link>
-                        <Link
+                        {/* <Link
                             id="option3"
                             onClick={this.handleClick}
                             innerRef={el => this.clients = el}
@@ -98,7 +98,6 @@ export class Navigation extends Component {
                             id="option6"
                             onClick={this.handleClick}
                             innerRef={el => this.option6 = el}
-                            className="menu-active"
                             to="/account/efunc">E-func</Link>
                     </div>
 
