@@ -10,14 +10,15 @@ export class Efunc extends Component {
         return (
             <div className="main-div flex">
                 <EClientsList />
-                <EClientData />
+                {this.props.isCreate || this.props.eclient.id ? <EClientData /> : null}
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-
+    isCreate: state.createEClientMode,
+    eclient: state.eclient,
 })
 
 const mapDispatchToProps = {

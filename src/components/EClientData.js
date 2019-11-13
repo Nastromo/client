@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import NewDropDown from './NewDropDown';
+import { changeEmail, changePhone, changeStreet, changeName, changeState, changeZip, pay, update, create } from '../store/actions/EClients';
+import EOrders from './EOrders';
 
 
 export class EClientData extends Component {
+
     render() {
         return (
             <div className="fhgyt">
@@ -18,61 +21,61 @@ export class EClientData extends Component {
                             height="37px"
                             status={this.props.isOpenGroup}
                             menu={this.props.groups}
-                            option={this.props.group} />
+                            option={this.props.client.group} />
+                        <p className="dfrt">Name</p>
+                        <input className="simple-input" value={this.props.client.name ? this.props.client.name : ""} onChange={this.props.changeName} />
                         <p className="dfrt">E-mail</p>
-                        <input className="simple-input" />
-                        <p className="dfrt">Password</p>
-                        <input className="simple-input" />
+                        <input className="simple-input" value={this.props.client.email ? this.props.client.email : ""} onChange={this.props.changeEmail} />
+                        {/* <p className="dfrt">Password</p> */}
+                        {/* <input className="simple-input" /> */}
                         <p className="dfrt">Phone</p>
-                        <input className="simple-input" />
+                        <input className="simple-input" value={this.props.client.phone ? this.props.client.phone : ""} onChange={this.props.changePhone} />
 
                     </div>
                     <div className="bas50">
                         <p className="dfrt">Street</p>
-                        <input className="simple-input" />
-                        <p className="dfrt">City</p>
-                        <input className="simple-input" />
+                        <input className="simple-input" value={this.props.client.street ? this.props.client.street : ""} onChange={this.props.changeStreet} />
                         <p className="dfrt">State</p>
-                        <input className="simple-input" />
+                        <input className="simple-input" value={this.props.client.state ? this.props.client.state : ""} onChange={this.props.changeState} />
                         <p className="dfrt">Zip</p>
-                        <input className="simple-input" />
+                        <input className="simple-input" value={this.props.client.zip ? this.props.client.zip : ""} onChange={this.props.changeZip} />
                     </div>
                 </div>
 
                 <div className="flex hgyt">
-                    <div className="grn-btn">Update</div>
+                    {this.props.isCreate ? <div onClick={this.props.create} className="create-btn">Create</div> : <div onClick={this.props.update} className="grn-btn">Update</div>}
+
                 </div>
 
-                <h4>Orders:</h4>
-                <div className="ord-tit">
-                    <p className="bas25">Test</p>
-                    <p className="bas25">Qty</p>
-                    <p className="bas25">Payment</p>
-                    <p className="bas25">Date</p>
-                </div>
-                {this.returnOrders()}
+                {this.props.isCreate ? null : <EOrders />}
 
-                <div className="create-btn">Create order</div>
             </div>
         )
     }
 
-    returnOrders = () => {
-        return (
-            <div className="ferof">
-
-            </div>
-        )
-    }
+    
 }
 
 const mapStateToProps = (state) => ({
-    groups: [`option1`, `option2`],
+    groups: [`group1`, `group2`],
     isOpenGroup: state.newDDStatus.groups_e,
+    client: state.eclient,
+    payments: state.epayments,
+    isOpenTestse: state.newDDStatus.tests_e,
+    etest: state.etest,
+    isCreate: state.createEClientMode
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+    changeEmail: (e) => dispatch(changeEmail(e)),
+    changePhone: (e) => dispatch(changePhone(e)),
+    changeStreet: (e) => dispatch(changeStreet(e)),
+    changeName: (e) => dispatch(changeName(e)),
+    changeState: (e) => dispatch(changeState(e)),
+    changeZip: (e) => dispatch(changeZip(e)),
+    pay: (qty, amount) => dispatch(pay(qty, amount)),
+    update: () => dispatch(update()),
+    create: () => dispatch(create())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(EClientData)

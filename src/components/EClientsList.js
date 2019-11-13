@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import '../table.css';
-// import { getClients, showClient, createClientMode } from '../store/actions/EClients';
+import { getClients, showClient, createClientMode } from '../store/actions/EClients';
 
 
 
 export class EClientList extends Component {
     componentDidMount() {
-        // this.props.getClients();
+        this.props.getClients();
     }
 
     initColumns = () => {
         return [
             {
                 Header: 'Client Login',
-                accessor: 'login',
+                accessor: 'email',
             },
             {
                 Header: 'Client Phone',
@@ -69,14 +69,14 @@ export class EClientList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    list: state.clients,
-    selected: state.activeClientRow,
+    list: state.eclients,
+    selected: state.activeERow,
 })
 
 const mapDispatchToProps = dispatch => ({
-    // getClients: () => dispatch(getClients()),
-    // showClient: (i) => dispatch(showClient(i)),
-    // createClientMode: (bool) => dispatch(createClientMode(bool))
+    getClients: () => dispatch(getClients()),
+    showClient: (i) => dispatch(showClient(i)),
+    createClientMode: (bool) => dispatch(createClientMode(bool))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EClientList)
