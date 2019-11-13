@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import NewDropDown from './NewDropDown';
 import moment from 'moment';
+import { pay } from '../store/actions/EClients';
 
 
 export class EOrders extends Component {
@@ -84,8 +85,8 @@ const mapStateToProps = (state) => ({
     etest: state.etest,
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+    pay: (qty, amount) => dispatch(pay(qty, amount)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(EOrders)
