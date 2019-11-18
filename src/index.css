@@ -2175,6 +2175,10 @@ p.logo-text:hover {
     align-items: center;
 }
 
+.margjj {
+    margin: 4px 0;
+}
+
 .dargh {
     margin: 3px 0;
 }
@@ -2261,6 +2265,11 @@ p.logo-text:hover {
 
 .payment-raw .bas25:last-child {
     margin: 0;
+}
+
+.repss {
+    height: 300px;
+    overflow: auto
 }
 
 .bas25 {

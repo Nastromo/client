@@ -12,14 +12,15 @@ export class Groups extends Component {
         return (
             <div className="flex main-d">
                 <GropList />
-                <GroupSettings />
+                {this.props.group.id || this.props.isCreate ? <GroupSettings /> : null}
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-
+    group: state.group,
+    isCreate: state.createGroup,
 })
 
 const mapDispatchToProps = {

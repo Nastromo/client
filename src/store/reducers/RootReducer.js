@@ -13,11 +13,15 @@ import { phys, phy, isCreateModePhy } from '../reducers/Phys';
 import { tabact } from '../reducers/Tabs';
 import { clients, client, activeClientRow, loc, activeLocRow, physs, files, logins, createLoc, createClient } from '../reducers/Clients';
 import { eclients, eclient, epayments, etest, createEClientMode, activeERow } from '../reducers/EClients';
+import { groups, group, createGroup } from '../reducers/Groups';
 
 
 
 
 const RootReducer = combineReducers({
+    createGroup,
+    group,
+    groups,
     activeERow,
     createEClientMode,
     etest,
