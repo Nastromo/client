@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import RepsListMini from './RepsListMini';
-import { changeComment, addRep, deleteRep, updateGroup, createGroup } from '../store/actions/Groups';
+import { changeComment, addRep, deleteRep, updateGroup, createGroup, changeGroupName } from '../store/actions/Groups';
 import SearchInput from './SearchInput';
 
 
@@ -17,6 +17,8 @@ export class GroupSettings extends Component {
         const list = JSON.parse(this.props.group.reps ? this.props.group.reps : "[]");
         return (
             <div className="driv-set">
+                <p className="title-input">Group name</p>
+                <input className="simple-input-s" type="text" value={this.props.group.groupName ? this.props.group.groupName : ""} onChange={this.props.changeGroupName} />
                 <p className="title-input">Sales Representatives:</p>
                 <SearchInput
                     id="rep"
@@ -73,6 +75,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => ({
     addRep: (text) => dispatch(addRep(text)),
     changeComment: (e) => dispatch(changeComment(e)),
+    changeGroupName: (e) => dispatch(changeGroupName(e)),
     deleteRep: (e) => dispatch(deleteRep(e)),
     updateGroup: () => dispatch(updateGroup()),
     createGroup: () => dispatch(createGroup()),

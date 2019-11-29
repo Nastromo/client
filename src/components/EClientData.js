@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import NewDropDown from './NewDropDown';
-import { changeEmail, changePhone, changeStreet, changeName, changeState, changeZip, pay, update, create } from '../store/actions/EClients';
+import { changeEmail, changePass, changePhone, changeStreet, changeName, changeState, changeZip, pay, update, create } from '../store/actions/EClients';
+import { getGroups } from '../store/actions/Groups'
+
 import EOrders from './EOrders';
 
 
 export class EClientData extends Component {
+    componentDidMount() {
+        this.props.getGroups()
+    }
 
     render() {
+        let gNames = [];
+        for (let i = 0; i < this.props.groups.length; i++) {
+            gNames.push(this.props.groups[i].groupName);
+        }
         return (
             <div className="fhgyt">
                 <h4>Client Data:</h4>
@@ -20,16 +29,15 @@ export class EClientData extends Component {
                             actionType="SET_GROUP_E_OPTION"
                             height="37px"
                             status={this.props.isOpenGroup}
-                            menu={this.props.groups}
+                            menu={gNames}
                             option={this.props.client.group} />
                         <p className="dfrt">Name</p>
                         <input className="simple-input" value={this.props.client.name ? this.props.client.name : ""} onChange={this.props.changeName} />
                         <p className="dfrt">E-mail</p>
                         <input className="simple-input" value={this.props.client.email ? this.props.client.email : ""} onChange={this.props.changeEmail} />
-                        {/* <p className="dfrt">Password</p> */}
-                        {/* <input className="simple-input" /> */}
-                        <p className="dfrt">Phone</p>
-                        <input className="simple-input" value={this.props.client.phone ? this.props.client.phone : ""} onChange={this.props.changePhone} />
+                        <p className="dfrt">Password</p>
+                        <input className="simple-input" value={this.props.client.pass ? this.props.client.pass : ""} onChange={this.props.changePass} />
+                        
 
                     </div>
                     <div className="bas50">
@@ -39,6 +47,8 @@ export class EClientData extends Component {
                         <input className="simple-input" value={this.props.client.state ? this.props.client.state : ""} onChange={this.props.changeState} />
                         <p className="dfrt">Zip</p>
                         <input className="simple-input" value={this.props.client.zip ? this.props.client.zip : ""} onChange={this.props.changeZip} />
+                        <p className="dfrt">Phone</p>
+                        <input className="simple-input" value={this.props.client.phone ? this.props.client.phone : ""} onChange={this.props.changePhone} />
                     </div>
                 </div>
 
@@ -57,7 +67,7 @@ export class EClientData extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    groups: [`group1`, `group2`],
+    groups: state.groups,
     isOpenGroup: state.newDDStatus.groups_e,
     client: state.eclient,
     payments: state.epayments,
@@ -68,6 +78,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
     changeEmail: (e) => dispatch(changeEmail(e)),
+    changePass: (e) => dispatch(changePass(e)),
     changePhone: (e) => dispatch(changePhone(e)),
     changeStreet: (e) => dispatch(changeStreet(e)),
     changeName: (e) => dispatch(changeName(e)),
@@ -75,7 +86,9 @@ const mapDispatchToProps = dispatch => ({
     changeZip: (e) => dispatch(changeZip(e)),
     pay: (qty, amount) => dispatch(pay(qty, amount)),
     update: () => dispatch(update()),
-    create: () => dispatch(create())
+    create: () => dispatch(create()),
+    getGroups: () => dispatch(getGroups()),
+    
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EClientData)

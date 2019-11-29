@@ -3,6 +3,8 @@ import { showNotification } from './Notification';
 
 
 
+
+
 export const setGroups = (list) => ({
     type: 'SET_GROUPS',
     list
@@ -34,6 +36,11 @@ export const showGroup = (i) => {
         }
     }
 }
+
+export const changeGroupName = (e) => ({
+    type: 'CHANGE_G_NAME',
+    text: e.target.value
+});
 
 export const changeComment = (e) => ({
     type: 'CHANGE_G_COMMENT',

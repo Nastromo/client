@@ -27,6 +27,11 @@ export const group = (state = {}, action) => {
             newState.comment = action.text;
             return newState;
 
+        case `CHANGE_G_NAME`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.groupName = action.text;
+            return newState;
+
         case `ADD_REP`:
             newState = JSON.parse(JSON.stringify(state));
             list = JSON.parse(newState.reps ? newState.reps : "[]");

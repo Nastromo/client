@@ -59,6 +59,11 @@ export const eclient = (state = {}, action) => {
             newState.email = action.text;
             return newState;
 
+        case `SET_E_PASS`:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.pass = action.text;
+            return newState;
+
         case `SET_GROUP_E_OPTION`:
             newState = JSON.parse(JSON.stringify(state));
             newState.group = action.obj.option;
