@@ -107,7 +107,7 @@ export const pay = (qty, amount) => {
         try {
             const client = getState().eclient;
             const test = getState().etest;
-            window.location.href = `http://localhost:17000/pay-client?clientId=${client.id}&clientName=${client.name}&testTitle=${test}&qty=${qty}&amount=${amount}`;
+            window.location.href = `https://mywellcom.us/pay-client?clientId=${client.id}&clientName=${client.name}&testTitle=${test}&qty=${qty}&amount=${amount}`;
         } catch (err) {
             console.log(err);
         }
