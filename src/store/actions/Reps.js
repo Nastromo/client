@@ -25,11 +25,7 @@ export const updateRep = () => {
     return async (dispatch, getState) => {
         try {
             const res = await API.put(`/v1/rep`, getState().rep);
-            if (res.data) {
-                dispatch(showNotification(`Created...`, `notification-show notification-green`));
-            } else {
-                dispatch(showNotification(`Updated...`, `notification-show notification-green`));
-            }
+            dispatch(showNotification(`Done...`, `notification-show notification-green`));
             dispatch(setReps(res.data));
             dispatch(setCreateMode(false));
         } catch (err) {
@@ -80,12 +76,12 @@ export const changeLast = (e) => ({
 });
 
 export const changePhone = (e) => ({
-    type: 'SET_PHONE',
+    type: 'SET_PHONE_REP',
     text: e.target.value
 });
 
 export const changeEmail = (e) => ({
-    type: 'SET_EMAIL',
+    type: 'SET_EMAIL_REP',
     text: e.target.value
 });
 

@@ -36,12 +36,12 @@ export const rep = (state = {}, action) => {
             newState.lastName = action.text;
             return newState;
 
-        case `SET_PHONE`:
+        case `SET_PHONE_REP`:
             newState = JSON.parse(JSON.stringify(state));
             newState.phone = action.text;
             return newState;
 
-        case `SET_EMAIL`:
+        case `SET_EMAIL_REP`:
             newState = JSON.parse(JSON.stringify(state));
             newState.email = action.text;
             return newState;
