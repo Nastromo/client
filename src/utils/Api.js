@@ -3,7 +3,11 @@ import axios from 'axios';
 let url = `http://192.168.20.216:8050`;
 if (window.location.href.includes(`localhost`)) {
     url = `http://localhost:9000`;
+} else if (window.location.href.includes(`clients.empirecitylabs.com`)) {
+    url = `http://192.168.20.221:8050`;
 }
+
+console.log(url)
 
 
 export default axios.create({
