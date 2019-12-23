@@ -10,17 +10,19 @@ export class Main extends Component {
 
 
     render() {
+        console.log(this.props.isShow)
         return (
             <div className="flex main-d">
                 <RepsList />
-                <RepsSettings />
+                {this.props.isShow ? <RepsSettings /> : null}
+                
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    
+    isShow: state.showReps,
 })
 
 const mapDispatchToProps = {

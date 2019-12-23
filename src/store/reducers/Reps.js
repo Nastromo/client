@@ -15,3 +15,12 @@ export const isCreate = (state = false, action) => {
         default: return state;
     }
 }
+
+export const showReps = (state = false, action) => {
+    switch (action.type) {
+        case `SHOW_REP_SIDE`:
+            return action.bool;
+
+        default: return state;
+    }
+}

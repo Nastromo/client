@@ -2,18 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import NewDropDown from './NewDropDown';
 import moment from 'moment';
-import { pay } from '../store/actions/EClients';
+import { pay, changePrice, changeQty } from '../store/actions/EClients';
 
 
 export class EOrders extends Component {
     constructor(props) {
         super(props);
-        this.testse = [`Weight Management`, `Nutritional Deficiency`];
+        this.testse = [`Weight Management`, `Nutritional Deficiency`, `Telomere`];
     }
 
     pay = () => {
-        if (this.qty.value && this.price.value) {
-            this.props.pay(this.qty.value, this.qty.value * this.price.value);
+        if (this.props.qty && this.props.price) {
+            const discount = (this.props.qty * this.props.price) >= 2950 ? 0.9 : 1;
+            this.props.pay(this.props.qty, this.props.qty * this.props.price * discount);
         }
     }
 
@@ -60,13 +61,19 @@ export class EOrders extends Component {
                             option={this.props.etest} />
                     </div>
                     <div className="bas25">
-                        <p className="dfrt">Price</p>
-                        <input type="number" ref={el => this.price = el} className="simple-input-s" />
-                    </div>
-                    <div className="bas25">
                         <p className="dfrt">Qty</p>
-                        <input type="number" ref={el => this.qty = el} className="simple-input-s" />
+                        <input type="number" value={this.props.qty} onChange={this.props.changeQty} className="simple-input-s" />
                     </div>
+
+                    <div className="bas25">
+                        <p className="dfrt">Price</p>
+                        <input type="number" value={this.props.price} onChange={this.props.changePrice} className="simple-input-s" />
+                    </div>
+
+                    <div className="bas25">
+                        {this.props.isDiscount ? <p className="dfrt">Discount: 10%</p> : null} 
+                    </div>
+                    
                     <div className="bas25">
                         <p className="dfrt dfr">1</p>
                         <div onClick={this.pay} className="pay-btn">Pay</div>
@@ -79,6 +86,9 @@ export class EOrders extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    qty: state.qty,
+    isDiscount: state.disc,
+    price: state.price,
     client: state.eclient,
     payments: state.epayments,
     isOpenTestse: state.newDDStatus.tests_e,
@@ -86,6 +96,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+    changePrice: (e) =>  dispatch(changePrice(e)),
+    changeQty: (e) => dispatch(changeQty(e)),
     pay: (qty, amount) => dispatch(pay(qty, amount)),
 })
 

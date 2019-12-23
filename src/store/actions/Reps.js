@@ -14,7 +14,7 @@ export const getReps = () => {
         try {
             const res = await API.get(`/v1/reps`);
             dispatch(setReps(res.data));
-            dispatch(showRep(0));
+            // dispatch(showRep(0));
         } catch (err) {
             console.log(err);
         }
@@ -34,9 +34,16 @@ export const updateRep = () => {
 }
 }
 
+export const showRepSide = (bool) => ({
+    type: 'SHOW_REP_SIDE',
+    bool
+});
+
+
 export const showRep = (index) => {
     return async (dispatch, getState) => {
         const list = getState().reps;
+        dispatch(showRepSide(true));
         dispatch(setRep(list[index]));
         dispatch(setActiveRow(index));
         dispatch(setCreateMode(false));
@@ -45,6 +52,7 @@ export const showRep = (index) => {
 
 export const setMode = (bool) => {
     return async (dispatch, getState) => {
+        dispatch(showRepSide(true));
         dispatch(setRep({}));
         dispatch(setCreateMode(bool));
     }

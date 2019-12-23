@@ -58,7 +58,7 @@ export class EClientData extends Component {
                 </div>
 
                 {this.props.isCreate ? null : <EOrders />}
-
+        
             </div>
         )
     }

@@ -73,7 +73,7 @@ export class Navigation extends Component {
                             onClick={this.handleClick}
                             innerRef={el => this.pending = el}
                             className="menu-active"
-                            to="/account/main">Represents</Link>
+                            to="/account/main">Sales Reps</Link>
                         <Link
                             id="option2"
                             onClick={this.handleClick}

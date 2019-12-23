@@ -14,6 +14,14 @@ export class EClientList extends Component {
     initColumns = () => {
         return [
             {
+                Header: 'Id',
+                accessor: 'id',
+            },
+            {
+                Header: 'Nhone',
+                accessor: 'name',
+            },
+            {
                 Header: 'Client Login',
                 accessor: 'email',
             },

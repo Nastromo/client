@@ -34,6 +34,33 @@ export const activeERow = (state = 0, action) => {
     }
 }
 
+export const price = (state = '295', action) => {
+    switch (action.type) {
+        case `CHANGE_PRICE`:
+            return action.text;
+
+        default: return state;
+    }
+}
+
+export const disc = (state = false, action) => {
+    switch (action.type) {
+        case `CHANGE_DISCOUNT`:
+            return action.bool;
+
+        default: return state;
+    }
+}
+
+export const qty = (state = 0, action) => {
+    switch (action.type) {
+        case `CHANGE_QTY`:
+            return action.text;
+
+        default: return state;
+    }
+}
+
 export const etest = (state = ``, action) => {
     switch (action.type) {
         case `SET_TEST_E_OPTION`:

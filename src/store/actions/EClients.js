@@ -44,6 +44,57 @@ export const changeZip = (e) => ({
     text: e.target.value,
 });
 
+export const changeP = (e) => ({
+    type: 'CHANGE_PRICE',
+    text: e.target.value,
+});
+
+export const changeQ = (e) => ({
+    type: 'CHANGE_QTY',
+    text: e.target.value,
+});
+
+export const setDisc = (bool) => ({
+    type: 'CHANGE_DISCOUNT',
+    bool,
+});
+
+export const changePrice = (e) => {
+    return async (dispatch, getState) => {
+        try {
+            const qty = getState().qty;
+            const amount = qty * e.target.value;
+            if (amount >= 2950) {
+                dispatch(setDisc(true));
+            } else {
+                dispatch(setDisc(false));
+            }
+            dispatch(changeP(e));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+export const changeQty = (e) => {
+    return async (dispatch, getState) => {
+        try {
+            const price = getState().price;
+            const amount = price * e.target.value;
+            if (amount >= 2950) {
+                dispatch(setDisc(true));
+            } else {
+                dispatch(setDisc(false));
+            }
+            dispatch(changeQ(e));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+
+
 export const getClients = () => {
     return async (dispatch, getState) => {
         try {
